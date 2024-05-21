@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+*.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.pyc
+*.bak
+*.cache
+*.project
+*.db.sqlite3
+db.sqlite3
+**/migrations/*.py
+**/migrations/*.pyc
+
+# Virtual Environment
+venv/
+
+# Ignore pipenv virtual environment
+/.venv
+
+# Python env
+/.python-version
+
+# Environments
+/.vscode
+/.idea
+.DS_Store
+node_modules/
