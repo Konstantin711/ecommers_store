@@ -4,6 +4,9 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
+import logging
+logger = logging.getLogger('django')
+
 
 class UserProfileManager(BaseUserManager):
     """Manager for User profiles"""
@@ -14,10 +17,8 @@ class UserProfileManager(BaseUserManager):
 
         email = self.normalize_email(email)
         user = self.model(email=email, name=name)
-
         user.set_password(password)
         user.save(using=self._db)
-
         return user
 
     def create_superuser(self, email, name, password):
@@ -26,16 +27,24 @@ class UserProfileManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
+        return user
 
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
 
+    ROLE_CHOICES = (
+        ('customer', 'Customer'),
+        ('admin', 'Admin'),
+        ('superadmin', 'SuperAdmin'),
+    )
+
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='customer')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = UserProfileManager()
 

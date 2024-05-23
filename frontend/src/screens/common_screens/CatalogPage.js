@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, Badge, Row, Col, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/common_components/Sidebar";
 
 const product = {
   name: "Nike Dunk Low Retro",

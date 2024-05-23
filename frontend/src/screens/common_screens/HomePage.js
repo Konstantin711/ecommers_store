@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "../components/Slider";
+import Slider from "../../components/common_components/Slider";
 
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";

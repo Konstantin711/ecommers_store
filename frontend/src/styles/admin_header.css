@@ -1,0 +1,35 @@
+.header {
+    width: 100%;
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header .logo h1 {
+    margin: 0;
+  }
+  
+  .header .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header .user-info span {
+    margin-right: 20px;
+  }
+  
+  .header .user-info button {
+    background-color: #e74c3c;
+    color: #ecf0f1;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .header .user-info button:hover {
+    background-color: #c0392b;
+  }
+  
