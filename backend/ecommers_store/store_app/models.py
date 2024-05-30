@@ -99,9 +99,10 @@ class Item(models.Model):
     slug = models.SlugField(max_length=64)
     qty = models.IntegerField(blank=True)
     price = models.FloatField(blank=True)
+    fake_price = models.FloatField(default=0.00, blank=True)
     description = models.TextField(blank=True, max_length=400)
     parent_type = models.ForeignKey(ParentType, on_delete=models.CASCADE)
-    item_type = models.ManyToManyField(ItemType)
+    category = models.ManyToManyField(ItemType)
     item_sizes = models.ManyToManyField(ItemSizes)
     item_colors = models.ManyToManyField(ItemColors)
 

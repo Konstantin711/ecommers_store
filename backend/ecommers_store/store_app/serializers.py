@@ -98,7 +98,7 @@ class ItemSerializer(serializers.ModelSerializer):
     """Serializer for Item with relations"""
 
     parent_type = ParentTypeSerializer()
-    item_type = ItemTypeSerializer(many=True)
+    category = ItemTypeSerializer(many=True)
     item_sizes = SizesSerializer(many=True)
     item_colors = ColorsSerializer(many=True)
 
@@ -111,14 +111,14 @@ class ItemSerializer(serializers.ModelSerializer):
             'price',
             'description',
             'parent_type',
-            'item_type',
+            'category',
             'item_sizes',
             'item_colors'
         ]
 
     def create(self, validated_data):
         parent_type_data = validated_data.pop('parent_type')
-        item_type_data = validated_data.pop('item_type')
+        item_type_data = validated_data.pop('category')
         item_sizes_data = validated_data.pop('item_sizes')
         item_colors_data = validated_data.pop('item_colors')
 
@@ -131,7 +131,7 @@ class ItemSerializer(serializers.ModelSerializer):
         # Створюємо екземпляр елемента
         item = Item.objects.create(parent_type=parent_type, **validated_data)
         # Додаємо типи елементу до екземпляра елемента
-        item.item_type.set(item_type_objs)
+        item.category.set(item_type_objs)
         item.item_sizes.set(item_sizes_objs)
         item.item_colors.set(item_colors_objs)
 
