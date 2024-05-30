@@ -11,6 +11,7 @@ import CatalogPage from "./screens/common_screens/CatalogPage";
 import ItemPage from "./screens/common_screens/ItemPage";
 
 import AdminPage from './screens/admin_screens/AdminPage'
+import NewItemPage from './screens/admin_screens/NewItemPage'
 
 function App() {
   return (
@@ -83,6 +84,16 @@ function App() {
             <AdminLayout>
               <Routes>
                 <Route index element={<AdminPage />} />
+              </Routes>
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/admin/add_new_item"
+          element={
+            <AdminLayout>
+              <Routes>
+                <Route index element={<NewItemPage />} />
               </Routes>
             </AdminLayout>
           }

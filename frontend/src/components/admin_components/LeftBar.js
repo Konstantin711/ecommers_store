@@ -30,14 +30,14 @@ function LeftBar() {
             </li>
           </ul>
         </ListGroup.Item>
-        <ListGroup.Item as={Link} to="/admin-items-control">
+        <ListGroup.Item>
           Керування товарами
           <ul className="uk-list uk-list-disc mt-2">
             <li>
-              <a href="/finished-orders">Додати новий товар</a>
+              <a href="/admin/add_new_item">Додати новий товар</a>
             </li>
             <li>
-              <a href="/failed-orders">Змінити товар</a>
+              <a href="/admin/change_item">Змінити товар</a>
             </li>
           </ul>
         </ListGroup.Item>

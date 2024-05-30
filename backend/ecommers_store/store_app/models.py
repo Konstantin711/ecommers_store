@@ -101,6 +101,16 @@ class Item(models.Model):
     price = models.FloatField(blank=True)
     fake_price = models.FloatField(default=0.00, blank=True)
     description = models.TextField(blank=True, max_length=400)
+
+    # maybe it will be extracted to separate moder or changed to separate images
+    images = models.CharField(max_length=255, blank=True)
+    item_care = models.CharField(max_length=255, blank=True)
+    model_parameters = models.CharField(max_length=255, blank=True)
+    seasons_use = models.CharField(max_length=255, blank=True)
+    item_material = models.CharField(max_length=255, blank=True)
+    # maybe it will be extracted too
+    print_category = models.CharField(max_length=255, blank=True)
+
     parent_type = models.ForeignKey(ParentType, on_delete=models.CASCADE)
     category = models.ManyToManyField(ItemType)
     item_sizes = models.ManyToManyField(ItemSizes)
