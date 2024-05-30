@@ -1,0 +1,66 @@
+/* MAIN HEADER */
+  /* NAVIGATION */
+  
+  .dark-dropdown-menu .dropdown-menu{
+    background-color: rgba(38, 37, 37, 0.95);
+    border-radius: 0 !important;
+  }
+
+  .dark-dropdown-menu .flex-fill {
+    flex: 1; /* Забезпечує рівномірне розподілення простору */
+  }
+
+  #basic-nav-dropdown{
+    /* letter-spacing: 2pt; */
+    font-family: Roboto, sans-serif;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #232323 !important;
+    text-transform: uppercase;
+  }
+
+  .men-tshirts {
+    letter-spacing: 3pt;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #646464 !important;
+    text-transform: uppercase;
+  }
+
+  .men-tshirts:hover {
+    color: #18d431 !important;
+    background-color: rgba(38, 37, 37, 0.95); 
+    letter-spacing: 3pt;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+  }
+  
+  .menu-item{
+    --bs-dropdown-link-hover-bg: initial;
+    margin-left: 16px;
+    letter-spacing: .4pt;
+    color: #fff !important;
+    font-size: .75em !important;
+    text-transform: uppercase;
+  }
+
+  .menu-item:hover{
+    --bs-dropdown-link-hover-bg: initial;
+    margin-left: 16px;
+    letter-spacing: .4pt;
+    color: #11aa0c !important;
+    font-size: .75em !important;
+    text-transform: uppercase;
+  }
+
+  .dropdown-menu a:hover {
+    --bs-dropdown-link-hover-bg: initial;
+    color: #130f0f;  
+  }
+
+  .dropdown-menu a:active {
+    background-color: rgba(38, 37, 37, 0.95); 
+   }
+   
+  /* NAVIGATION */
+/* MAIN HEADER */

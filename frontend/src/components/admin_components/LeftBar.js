@@ -1,50 +1,52 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
-import '../../styles/left_bar.css';  
+import { Link } from "react-router-dom";
 
+import ListGroup from "react-bootstrap/ListGroup";
+import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 
-const LeftBar = () => {
+function LeftBar() {
   return (
-    <div className="sidebar">
-      <ul>
-        <li>
-          <Link to="/dashboard">Головна</Link>
-        </li>
-        <li>
+    <Col sm={2} className="leftBar">
+      <ListGroup>
+        <ListGroup.Item>
+          Замовлення
+          <ul className="uk-list uk-list-disc mt-2">
+            <li>
+              <a href="/current-orders">Поточні замовлення</a>
+            </li>
+          </ul>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          Статистика
+          <ul className="uk-list uk-list-disc mt-2">
+            <li>
+              <a href="/finished-orders">Успішні замовлення</a>
+            </li>
+            <li>
+              <a href="/failed-orders">Втрачені замовлення</a>
+            </li>
+          </ul>
+        </ListGroup.Item>
+        <ListGroup.Item as={Link} to="/admin-items-control">
           Керування товарами
-          <ul>
+          <ul className="uk-list uk-list-disc mt-2">
             <li>
-              <Link to="/products/add">Додати товари</Link>
+              <a href="/finished-orders">Додати новий товар</a>
             </li>
             <li>
-              <Link to="/products/edit">Редагувати товари</Link>
-            </li>
-            <li>
-              <Link to="/products/delete">Видалити товари</Link>
+              <a href="/failed-orders">Змінити товар</a>
             </li>
           </ul>
-        </li>
-        <li>
-          <Link to="/orders">Замовлення</Link>
-        </li>
-        <li>
-          <Link to="/users">Користувачі</Link>
-        </li>
-        <li>
-          Налаштування
-          <ul>
-            <li>
-              <Link to="/settings/profile">Профіль</Link>
-            </li>
-            <li>
-              <Link to="/settings/security">Безпека</Link>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+        </ListGroup.Item>
+        <ListGroup.Item as={Link} to="/admin-price-wather">
+          Монітор цін
+        </ListGroup.Item>
+      </ListGroup>
+    </Col>
   );
-};
+}
 
 export default LeftBar;

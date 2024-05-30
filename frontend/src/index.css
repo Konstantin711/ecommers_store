@@ -1,434 +1,72 @@
-/* RESET */
-/* Reset CSS */
+/* ADMIN */
 
-/* Remove default margin */
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
+html, body, #root {
+  height: 100%;
   margin: 0;
+}
+
+#adminContainer{
+  height: 100%;
+
+}
+
+#adminRow{
+  height: 100%;
+  
+}
+
+.adminHeader{
+  background-color: #3d3d3d;
   padding: 0;
+  height: 60px;
 }
-
-/* Remove default list styles */
-ul,
-ol {
-  list-style: none;
+.adminHeader a {
+  color: white;
 }
-
-/* Remove default box sizing */
-* {
-  box-sizing: border-box;
-}
-
-/* Remove default text decoration */
-a {
-  text-decoration: none !important;
-}
-
-/* Remove default font styles */
-body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-/* RESET */
-
-/* TOP HEADER */
-.top-header {
-  background-color: #232323;
-  min-height: 44px;
-  color: hsla(0, 0%, 100%, .8);
-}
-
-.top-header a {
-  font-family: Roboto, sans-serif;
-  color: hsla(0, 0%, 100%, .8);
-  text-decoration: none;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  vertical-align: top;
-  font-style: normal;
-}
-
-a.th-link {
-  font-size: 0.7em;
-  font-weight: 400;
-}
-
-.divider {
-  font-size: 0.7em;
-  margin-top: 5px;
-  font-weight: 200;
-}
-
-.h-phone {
-  font-size: 0.8em;
-  font-weight: 500;
-}
-
-/* TOP HEADER */
-/* MAIN HEADER */
-  /* NAVIGATION */
-  
-  .dark-dropdown-menu .dropdown-menu{
-    background-color: rgba(38, 37, 37, 0.95);
-    border-radius: 0 !important;
-  }
-
-  .dark-dropdown-menu .flex-fill {
-    flex: 1; /* Забезпечує рівномірне розподілення простору */
-  }
-
-  #basic-nav-dropdown{
-    /* letter-spacing: 2pt; */
-    font-family: Roboto, sans-serif;
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    color: #232323 !important;
-    text-transform: uppercase;
-  }
-
-  .men-tshirts {
-    letter-spacing: 3pt;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    color: #646464 !important;
-    text-transform: uppercase;
-  }
-
-  .men-tshirts:hover {
-    color: #18d431 !important;
-    background-color: rgba(38, 37, 37, 0.95); 
-    letter-spacing: 3pt;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-  }
-  
-  .menu-item{
-    --bs-dropdown-link-hover-bg: initial;
-    margin-left: 16px;
-    letter-spacing: .4pt;
-    color: #fff !important;
-    font-size: .75em !important;
-    text-transform: uppercase;
-  }
-
-  .menu-item:hover{
-    --bs-dropdown-link-hover-bg: initial;
-    margin-left: 16px;
-    letter-spacing: .4pt;
-    color: #11aa0c !important;
-    font-size: .75em !important;
-    text-transform: uppercase;
-  }
-
-  .dropdown-menu a:hover {
-    --bs-dropdown-link-hover-bg: initial;
-    color: #130f0f;  
-  }
-
-  .dropdown-menu a:active {
-    background-color: rgba(38, 37, 37, 0.95); 
-   }
-   
-  /* NAVIGATION */
-/* MAIN HEADER */
-
-/* MAIN SLIIDER */
-
-.slider-img{
-  max-height: 87vh; /* Задайте бажану максимальну висоту */
-  object-fit: cover; /* Обрізає зображення, щоб воно заповнило контейнер, не порушуючи пропорції */
-  width: 100%;
-}
-/* MAIN SLIDER */
-
-/* MAIN PAGE ITEMS */
-.new-items{
-  font-family: Roboto, sans-serif;
-  color: rgb(35, 35, 35);
-  text-transform: uppercase;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.25em;
-  width: 100%;
-}
-
-.category-card{
-  height: 25rem; width: 25rem;
-  padding: 0; margin: 0;
-}
-
-  .category-card:hover{
-    font-weight: 600;
-  } 
-
-.category-card-text{
-  position: relative; bottom: 91px;
-  text-align: center; padding-top: 2.2rem; padding-bottom: 2.2rem;
-  display: block;
-  width: 100%; height: 90px;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.category-card-text p{
-  color: #fff;
-  text-transform: uppercase;
-  text-decoration: none;
-}  
-
-.category-img{
-  max-height: 29rem;
-}
-
-.main-row{
-  width: 100%;
-  padding: 0 8%; 
-}
-/* MAIN PAGE ITEMS */
-
-/* FOOTER */
-.footer{
-  margin-top: 150px !important;
-  padding-top: 20px;
-  background-color: #232323 !important;
-}
-
-.small-footer{
-  background-color: #232323 !important;
-  padding: 40px 20px 10px 20px;
-}
-
-.footer-logo{
-  padding-top: 1%;
-}
-
-.footer-sell-text{
-  font-family: Roboto, sans-serif;
-  /* color: rgb(35, 35, 35); */
-  /* text-transform: uppercase; */
-  font-weight: 400;
-  font-style: normal;
-  font-size: 0.75em;
-}
-
-/* FOOTER */
-/* SIDEBAR */
-.sidebar-text{
-  font-family: Roboto, sans-serif;
-  color: #91c0c0;
-  font-style: normal;
+.adminHeader a:hover {
+  color: white;
   font-weight: 600;
-  font-size: 1em;
-
-  margin-top: 30px;
+  
 }
 
-.sidebar-price{
-  font-family: Roboto, sans-serif;
-  color: #91c0c0;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1em;
+div.adminHeaderContainer{
+  padding-left: 50px;
+  width: 100%; max-width: 100%;
 }
 
-.slider-block{
-  margin-left: 15px;
+.leftBar {
+  color: rgb(255 255 255 / 70%);
+  background-color: #4c4c4c;
+  border-right: 1px solid rgb(255 255 255 / 50%);
+  flex: 0 0 15%;
+  height: 100%;
+  
 }
 
-.category-checkboxes, .price-text{
-  font-family: Roboto, sans-serif;
-  color: rgb(68 68 68);
-  font-style: normal;
-  font-weight: 300;
-  font-size: 0.85em;
+.mainContent {
+  /* color: rgb(255 255 255 / 70%); */
+  /* background-color: #181818; */
+
+  flex: 1;
+  height: 100%;
 }
 
-.sizes-button{
-  margin-right: 5px;
-  margin-top: 5px;
-  border-radius: 0%;
+div .list-group-item{
+  color: rgb(255 255 255 / 70%);
+  background-color: #181818;
 }
 
-.sizes-button:checked{
-  color: #11aa0c;
+div .list-group{
+  margin-top: 8%;
 }
 
-/* SIDEBAR */
 
-/* BUY BUTTON */
-
-.buy-button{
-  background-color: transparent !important;
-  color: #91c0c0 !important;
-  width: 90px; height: 30px;
-  border-radius: 0% !important;
-  border: 2px solid #91c0c0 !important;
-  --bs-btn-padding-x: none !important;
+.leftBar {
+  color: rgb(255 255 255 / 70%);
+  background-color: #4c4c4c;
+  border-right: 1px solid rgb(255 255 255 / 50%);
+  flex: 0 0 15%;
+  height: 100%;
+  
 }
-
-.buy-button:hover{
-  background-color: #91c0c0 !important;
-  color: #ffffff !important;
-  border-radius: 0% !important;
-  border: 2px solid #91c0c0 !important;
-}
-
-/* BUY BUTTON */
-
-/* SINGLE ITEM PAGE */
-.item-title{
-  font-size: 26px;
-  font-style: italic;
-  font-family: Ubuntu, sans-serif;
-}
-
-.item-sub-title{
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 500;
-  color: #303130;
-}
-
-.description-title{
-  font-size: 16px;
-  font-family: Ubuntu, sans-serif;
-  font-weight: 500;
-}
-
-.item-description{
-  font-family: "Roboto Flex", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 250;
-  font-style: normal;
-}
-
-.item-composition{
-  font-family: "Roboto Flex", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 250;
-  font-style: normal;
-}
-
-.item-price-block{
-  font-size: 26px;
-  margin-top: 10px;
-  font-family: Ubuntu, sans-serif;
-  font-weight: 500;
-  display: block;
-}
-
-.item-price{
-  font-size: 24px;
-  font-family: Ubuntu, sans-serif;
-  font-weight: 450;
-  float: right;
-  margin-right: 9%;
-  margin-top: 6px;
-}
-
-.price-title{
-  font-size: 14px;
-  color: #303130;
-  font-family: Ubuntu, sans-serif;
-  font-weight: 350;
-  margin-right: 10px;
-}
-
-.buy-block{
-  margin-right: 9%;
-}
-
-/* SIZES */
-
-.item-sizes-button{
-  margin-right: 5px;
-  /* margin-top: 5px; */
-  border-radius: 0%;
-}
-
-.item-sizes-button:checked{
-  color: #11aa0c;
-}
-
-.size-title{
-  font-size: 14px;
-  color: #303130;
-  font-family: Ubuntu, sans-serif;
-  font-weight: 350;
-
-  margin-bottom: 0px;
-}
-
-/* SIZES */
-
-/* SIZES TABLE BLOCK */
-.sizes-modal{
-  /* padding: 200px 400px; */
-}
-
-.size-img{
-  width: 200px;
-}
-
-.size-table{
-  border-collapse: collapse;
-  width: 100%;
-  color: #000;
-}
-
-.size-table th {
-  border-bottom: 1px solid #b3b3b3;
-  border-right: 1px solid #b3b3b3;
-}
-
-.size-table td {
-  text-align: center;
-  border: 1px solid #b3b3b3;
-  padding-bottom: 5px;
-  padding-top: 15px;
-}
-
-.sizes-table-link{
-  border-bottom: 1px solid rgba(0, 0, 0, .639);
-  color: #303130;
-  font-size: 13px;
-}
-
-/* SIZES TABLE BLOCK */
-
-/* ITEM PAGE BUY BUTTON */
-
-.buy-button-item-page{
-  background-color: transparent !important;
-  color: #91c0c0 !important;
-  width: 84px; height: 30px;
-  border-radius: 0% !important;
-  border: 2px solid #91c0c0 !important;
-  --bs-btn-padding-x: none !important;
-}
-
-.buy-button-item-page:hover{
-  background-color: #91c0c0 !important;
-  color: #ffffff !important;
-  border-radius: 0% !important;
-  border: 2px solid #91c0c0 !important;
-}
-/* ITEM PAGE BUY BUTTON */
-
-/* SINGLE ITEM PAGE */
-
+/* ADMIN  */

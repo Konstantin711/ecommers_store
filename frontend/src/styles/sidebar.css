@@ -1,0 +1,42 @@
+/* SIDEBAR */
+.sidebar-text{
+    font-family: Roboto, sans-serif;
+    color: #91c0c0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+  
+    margin-top: 30px;
+  }
+  
+  .sidebar-price{
+    font-family: Roboto, sans-serif;
+    color: #91c0c0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+  }
+  
+  .slider-block{
+    margin-left: 15px;
+  }
+  
+  .category-checkboxes, .price-text{
+    font-family: Roboto, sans-serif;
+    color: rgb(68 68 68);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.85em;
+  }
+  
+  .sizes-button{
+    margin-right: 5px;
+    margin-top: 5px;
+    border-radius: 0%;
+  }
+  
+  .sizes-button:checked{
+    color: #11aa0c;
+  }
+  
+  /* SIDEBAR */

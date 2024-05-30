@@ -1,0 +1,45 @@
+/* RESET */
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default box sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove default text decoration */
+a {
+  text-decoration: none !important;
+}
+
+/* Remove default font styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+/* RESET */
