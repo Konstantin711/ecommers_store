@@ -11,8 +11,8 @@ function LeftBar() {
   return (
     <Col sm={2} className="leftBar">
       <ListGroup>
-        <ListGroup.Item>
-          Замовлення
+        <ListGroup.Item className="">
+          <p className="leftbar-categories">Замовлення</p>
           <ul className="uk-list uk-list-disc mt-2">
             <li>
               <a href="/current-orders">Поточні замовлення</a>
@@ -20,7 +20,7 @@ function LeftBar() {
           </ul>
         </ListGroup.Item>
         <ListGroup.Item>
-          Статистика
+          <p className="leftbar-categories">Статистика</p>
           <ul className="uk-list uk-list-disc mt-2">
             <li>
               <a href="/finished-orders">Успішні замовлення</a>
@@ -31,7 +31,7 @@ function LeftBar() {
           </ul>
         </ListGroup.Item>
         <ListGroup.Item>
-          Керування товарами
+          <p className="leftbar-categories">Керування товарами</p>
           <ul className="uk-list uk-list-disc mt-2">
             <li>
               <a href="/admin/add_new_item">Додати новий товар</a>
