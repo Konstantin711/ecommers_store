@@ -99,6 +99,9 @@ function NewItemPage({ categories, parentTypes }) {
   const handleImageUpload = (acceptedFiles) => {
     setFormData({ ...formData, image: acceptedFiles[0] });
   };
+  const handleColorChangeComplete = (color) => {
+    setFormData({ ...formData, item_colors: [...formData.item_colors, color.hex] });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -231,8 +234,9 @@ function NewItemPage({ categories, parentTypes }) {
                     value={formData.parent_type}
                     onChange={handleChange}
                     required
+                    className="custom-option"
                   >
-                    <option value="">Виберіть тип батька</option>
+                    <option value="">Виберіть стать</option>
                     <option key="1" value="men">
                       чоловічі
                     </option>
@@ -274,6 +278,7 @@ function NewItemPage({ categories, parentTypes }) {
                       className="item-sizes-button"
                       key={size}
                       id={`size-${size}`}
+                      name="item_sizes"
                       type="checkbox"
                       variant={
                         selectedSizes.includes(size)
@@ -281,6 +286,7 @@ function NewItemPage({ categories, parentTypes }) {
                           : "outline-secondary"
                       }
                       value={size}
+                      onChange={handleChange}
                       onClick={() => toggleSize(size)}
                     >
                       {size}
@@ -289,15 +295,14 @@ function NewItemPage({ categories, parentTypes }) {
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group controlId="item_colors" className="mt-2">
-                  <Form.Label className="form-title-admin">
-                    Кольори</Form.Label>
-                  <CirclePicker
-                    color={color}
-                    colors={colors}
-                    onChangeComplete={handleChangeComplete}
-                  />
-                </Form.Group>
+              <Form.Group controlId="item_colors" className="mt-2">
+              <Form.Label className="form-title-admin">Кольори</Form.Label>
+              <CirclePicker
+                name="item_colors"
+                colors={colors}
+                onChangeComplete={handleColorChangeComplete}
+              />
+            </Form.Group>
               </Col>
             </Row>
 

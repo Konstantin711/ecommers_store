@@ -87,6 +87,7 @@ class ItemSizes(models.Model):
 class ItemColors(models.Model):
     title = models.CharField(max_length=64, blank=True)
     value = models.CharField(max_length=64, blank=True)
+    color_hash = models.CharField(max_length=128, blank=True)
 
     def __str__(self) -> str:
         return f'{self.title} - {self.value}'
@@ -94,7 +95,7 @@ class ItemColors(models.Model):
 
 class Item(models.Model):
     """Clothes Item, where type_ means type of clothes"""
-
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=64)
     qty = models.IntegerField(blank=True)
