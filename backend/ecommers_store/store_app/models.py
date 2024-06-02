@@ -87,7 +87,7 @@ class ItemSizes(models.Model):
 class ItemColors(models.Model):
     title = models.CharField(max_length=64, blank=True)
     value = models.CharField(max_length=64, blank=True)
-    color_hash = models.CharField(max_length=128, blank=True)
+    color_hex = models.CharField(max_length=128, blank=True)
 
     def __str__(self) -> str:
         return f'{self.title} - {self.value}'

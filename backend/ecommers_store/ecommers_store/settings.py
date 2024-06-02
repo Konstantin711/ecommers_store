@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'corsheaders',
     'store_app',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -39,6 +40,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+# або, для більш конкретних налаштувань:
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Замініть на домен вашого фронтенду
+    "http://127.0.0.1:3000",
 ]
 
 ROOT_URLCONF = 'ecommers_store.urls'

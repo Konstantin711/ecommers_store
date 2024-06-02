@@ -123,14 +123,48 @@ def getItemBySlug(request, slug):
 
 # ADMIN API
 
-@api_view(["POST"])
+@api_view(["POST", "GET"])
 def addNewItem(request):
     """Create a new Item"""
 
-    serialized_data = serializers.ItemSerializer(data=request.data)
+    if request.method == "GET":
+        parent_types = models.ParentType.objects.all()
+        categories = models.ItemType.objects.all()
+        sizes = models.ItemSizes.objects.all()
+        colors = models.ItemColors.objects.all()
 
-    if serialized_data.is_valid():
-        serialized_data.save()
-        return Response(serialized_data.data, status=status.HTTP_201_CREATED)
-    return Response(serialized_data.data, status=status.HTTP_400_BAD_REQUEST)
+        serialized_types = serializers.ParentTypeSerializer(parent_types, many=True).data
+        serialized_categories = serializers.ItemTypeSerializer(categories, many=True).data
+        serialized_sizes = serializers.SizesSerializer(sizes, many=True).data
+        serialized_colors = serializers.ColorsSerializer(colors, many=True).data
+
+        page_data = {"types": serialized_types, 
+                     "categories": serialized_categories, 
+                     "sizes": serialized_sizes, 
+                     "colors": serialized_colors}
+
+        return Response(page_data, status=status.HTTP_200_OK)
+    
+    else:
+        data = request.data.copy()
+        print(data, 'Initial')
+        
+        # Перетворення даних у необхідний формат
+        data['parent_type'] = {'slug': data.get('parent_type').get('title'), 'title': 'чоловічі' if data.get('parent_type').get('title') == 'men' else 'жіночі'}
+        data['category'] = [{'slug': data.get('category').get('category'), 'title': 'футболки' if data.get('category').get('category') == 'tshirts' else 'інше'}]
+        data['item_sizes'] = [{'title': size, 'value': size} for size in data.get('item_sizes', [])]
+        data['item_colors'] = [{'color_hash': color, 'title': 'білий' if color == '#ffffff' else 'чорний', 'value': 'white' if color == '#ffffff' else 'black'} for color in data.get('item_colors', [])]
+
+        print("Вхідні дані:", data)  # Виведення вхідних даних для відладки
+
+        serialized_data = serializers.ItemSerializer(data=data)
+        print(serialized_data.is_valid())
+        print(serialized_data.errors)
+
+        if serialized_data.is_valid():
+            serialized_data.save()
+            return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+        return Response({'error': 'serialized_data.data'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
