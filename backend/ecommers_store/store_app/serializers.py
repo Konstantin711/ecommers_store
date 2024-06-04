@@ -102,6 +102,8 @@ class ItemSerializer(serializers.ModelSerializer):
     item_sizes = SizesSerializer(many=True)
     item_colors = ColorsSerializer(many=True)
 
+    images = serializers.ImageField()
+
     class Meta:
         model = Item
         fields = [
@@ -122,6 +124,7 @@ class ItemSerializer(serializers.ModelSerializer):
             'item_sizes',
             'item_colors',
         ]
+
 
     def create(self, validated_data):
 

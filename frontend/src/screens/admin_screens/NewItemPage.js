@@ -33,22 +33,15 @@ function NewItemPage() {
     price: 0.0,
     fake_price: 0.0,
     description: "",
+    images: [],
     parent_type: { title: "", slug: "" },
-    category: { title: "", slug: "" },
+    category: [{ title: "", slug: "" }],
     item_sizes: [{ title: "", value: "" }],
     item_colors: [{ title: "", value: "", color_hex: "" }],
   });
 
-  const [colors, setColors] = useState(["#ffffff", "#000000"]);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [currentColor, setCurrentColor] = useState([]);
-
-  useEffect(() => {
-    if (data && data.colors) {
-      const colorHexArray = data.colors.map((color) => color.color_hex);
-      setColors(colorHexArray);
-    }
-  }, [data]);
 
   const toggleSize = (size) => {
     const currentIndex = selectedSizes.indexOf(size);
@@ -95,7 +88,7 @@ function NewItemPage() {
     } else if (name === "category") {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        category: { title: value, slug: value },
+        category: [{ title: value, slug: value }],
       }));
     } else {
       setFormData({ ...formData, [name]: value });
@@ -103,26 +96,33 @@ function NewItemPage() {
   };
 
   const handleImageUpload = (acceptedFiles) => {
-    setFormData({ ...formData, image: acceptedFiles[0] });
-  };
+    setFormData((prevFormData) => ({
+        ...prevFormData,
+        images: acceptedFiles,
+    }));
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
 
-    const data = {
-      title: formData.title,
-      slug: formData.slug,
-      qty: formData.qty,
-      price: formData.price,
-      fake_price: formData.fake_price,
-      description: formData.description,
-      parent_type: formData.parent_type,
-      category: formData.category,
-      item_sizes: formData.item_sizes,
-      item_colors: formData.item_colors,
-      image: formData.image,
-    };
+    const data = new FormData();
+    data.append('title', formData.title);
+    data.append('slug', formData.slug);
+    data.append('qty', formData.qty);
+    data.append('price', formData.price);
+    data.append('fake_price', formData.fake_price);
+    data.append('description', formData.description);
+
+    data.append('parent_type', JSON.stringify(formData.parent_type));
+    data.append('category', JSON.stringify(formData.category));
+    data.append('item_sizes', JSON.stringify(formData.item_sizes));
+    data.append('item_colors', JSON.stringify(formData.item_colors));
+
+    formData.images.forEach((file, index) => {
+      data.append(`images[${index}]`, file);
+  });
 
     try {
       const response = await axios.post(
@@ -130,7 +130,7 @@ function NewItemPage() {
         data,
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
@@ -346,7 +346,7 @@ function NewItemPage() {
                   Завантажити зображення
                 </Form.Label>
                 <ImageUpload onImageUpload={handleImageUpload} />
-                {formData.image && <p>{formData.image.name}</p>}
+                {formData.images && <p>{formData.images.name}</p>}
               </Form.Group>
 
               <Button variant="primary" type="submit">

@@ -104,7 +104,7 @@ class Item(models.Model):
     description = models.TextField(blank=True, max_length=400)
 
     # maybe it will be extracted to separate moder or changed to separate images
-    images = models.CharField(max_length=255, blank=True)
+    images = models.ImageField(upload_to='images/', blank=True)
     item_care = models.CharField(max_length=255, blank=True)
     model_parameters = models.CharField(max_length=255, blank=True)
     seasons_use = models.CharField(max_length=255, blank=True)

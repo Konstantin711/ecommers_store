@@ -1,4 +1,5 @@
 from dataclasses import dataclass, fields, asdict
+import json
 from . import models
 from . import serializers
 
@@ -146,16 +147,19 @@ def addNewItem(request):
         return Response(page_data, status=status.HTTP_200_OK)
     
     else:
-        data = request.data.copy()
-        print(data, 'Initial')
-        
-        # Перетворення даних у необхідний формат
-        data['parent_type'] = {'slug': data.get('parent_type').get('title'), 'title': 'чоловічі' if data.get('parent_type').get('title') == 'men' else 'жіночі'}
-        data['category'] = [{'slug': data.get('category').get('category'), 'title': 'футболки' if data.get('category').get('category') == 'tshirts' else 'інше'}]
-        data['item_sizes'] = [{'title': size, 'value': size} for size in data.get('item_sizes', [])]
-        data['item_colors'] = [{'color_hash': color, 'title': 'білий' if color == '#ffffff' else 'чорний', 'value': 'white' if color == '#ffffff' else 'black'} for color in data.get('item_colors', [])]
+        data = request.data.dict()
 
-        print("Вхідні дані:", data)  # Виведення вхідних даних для відладки
+
+        print(data, 'Initial')
+
+        data['parent_type'] = json.loads(data.get('parent_type', '{}'))
+        data['category'] = json.loads(data.get('category', '[]'))
+        data['item_sizes'] = json.loads(data.get('item_sizes', '[]'))
+        data['item_colors'] = json.loads(data.get('item_colors', '[]'))
+
+        files = request.FILES.getlist('images[0]')
+        data['images'] = files[0]
+        print(data['images'], 'FILES')
 
         serialized_data = serializers.ItemSerializer(data=data)
         print(serialized_data.is_valid())

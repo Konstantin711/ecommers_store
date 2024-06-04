@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-gdc*m943k+#mbb5=%kla0n&8509=jz=abr$g35ugve%_1)3)@1'
 
@@ -74,7 +76,7 @@ WSGI_APPLICATION = 'ecommers_store.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -133,3 +135,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# URL для медіафайлів
+MEDIA_URL = '/media/'
+# Директорія для збереження медіафайлів
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL для статичних файлів
+STATIC_URL = '/static/'
+# Директорія для збереження статичних файлів
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
