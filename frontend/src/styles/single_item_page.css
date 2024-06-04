@@ -90,6 +90,16 @@
   color: #11aa0c;
 }
 
+.item-colors-button{
+  margin-right: 5px;
+  /* margin-top: 5px; */
+  border-radius: 0%;
+}
+
+.item-colors-button:checked{
+  color: #11aa0c;
+}
+
 .size-title{
   font-size: 14px;
   color: #303130;
