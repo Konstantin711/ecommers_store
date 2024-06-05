@@ -127,69 +127,10 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-
-        print(validated_data, 'validated_data')
-
         parent_type_data = validated_data.pop('parent_type')
-        # if parent_type_data[0] =='women':
-        #     parent_type_data = {
-        #         "title": "жіночі",
-        #         "slug": "women"
-        #     }
-        # else:
-        #     parent_type_data = {
-        #         "title": "чоловічі",
-        #         "slug": "men"
-        #     }
-
         item_type_data = validated_data.pop('category')
-        # if item_type_data[0] == 'thirts':
-        #     item_type_data = {
-        #             "title": "футболки",
-        #             "slug": "thirts"
-        #         }
-
         item_sizes_data = validated_data.pop('item_sizes')
-        # refactored_sizes = {}
-        # for size in item_sizes_data:
-        #     if size.lower() == 's':
-        #         refactored_sizes.update({
-        #             "title": "s",
-        #             "value": "s"
-        #         })
-        #     elif size.lower() == 'm':
-        #         refactored_sizes.update({
-        #             "title": "m",
-        #             "value": "m"
-        #         })
-        #     elif size.lower() == 'l':
-        #         refactored_sizes.update({
-        #             "title": "l",
-        #             "value": "l"
-        #         })
-        #     elif size.lower() == 'xl':
-        #         refactored_sizes.update({
-        #             "title": "xl",
-        #             "value": "xl"
-        #         })
-        # item_sizes_data = refactored_sizes
-
         item_colors_data = validated_data.pop('item_colors')
-        # refactored_colors = {}
-        # for color in item_colors_data:
-        #     if color.lower() == '#ffffff':
-        #         refactored_colors.update({
-        #             "title": "білий",
-        #             "value": "white",
-        #             "color_hash": "#FFFFFF"
-        #         })
-        #     elif color.lower() == '#000000':
-        #         refactored_colors.update({
-        #             "title": "чорний",
-        #             "value": "black",
-        #             "color_hash": "#000000"
-        #         })
-        # item_colors_data = refactored_colors
 
         # Створюємо екземпляр батьківського типу
         parent_type = ParentType.objects.get_or_create(**parent_type_data)[0]

@@ -28,7 +28,6 @@ function NewItemPage() {
 
   const [formData, setFormData] = useState({
     title: "",
-    slug: "",
     qty: 0,
     price: 0.0,
     fake_price: 0.0,
@@ -61,6 +60,7 @@ function NewItemPage() {
   };
 
   const toggleColor = (color) => {
+    console.log(color)
     const currentIndex = currentColor.indexOf(color);
     const newSelectedColors = [...currentColor];
 
@@ -73,7 +73,9 @@ function NewItemPage() {
     setCurrentColor(newSelectedColors);
     setFormData((prevFormData) => ({
       ...prevFormData,
-      item_colors: newSelectedColors.map((s) => ({ title: s, value: s })),
+      item_colors: newSelectedColors.map((s) => (
+        { value: s.split('-')[0], title: s.split('-')[1] }
+      )),
     }));
   };
 
@@ -86,9 +88,10 @@ function NewItemPage() {
         parent_type: { slug: value, title: selectedOption.text },
       }));
     } else if (name === "category") {
+      const selectedOption = e.target.selectedOptions[0];
       setFormData((prevFormData) => ({
         ...prevFormData,
-        category: [{ title: value, slug: value }],
+        category: [{ slug: value, title: selectedOption.text }],
       }));
     } else {
       setFormData({ ...formData, [name]: value });
@@ -109,7 +112,6 @@ function NewItemPage() {
 
     const data = new FormData();
     data.append('title', formData.title);
-    data.append('slug', formData.slug);
     data.append('qty', formData.qty);
     data.append('price', formData.price);
     data.append('fake_price', formData.fake_price);
@@ -153,25 +155,12 @@ function NewItemPage() {
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="title" className="mb-2">
                 <Form.Label className="form-title-admin">
-                  Назва товару / Item title - не більше 160 символів
+                  Назва товару - не більше 160 символів
                 </Form.Label>
                 <Form.Control
                   type="text"
                   name="title"
                   value={formData.title}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group controlId="slug" className="mb-2">
-                <Form.Label className="form-title-admin">
-                  Slug - ідентифікатор товара
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="slug"
-                  value={formData.slug}
                   onChange={handleChange}
                   required
                 />
@@ -323,16 +312,16 @@ function NewItemPage() {
                           className="item-colors-button"
                           // style={{ background: color.color_hex }}
                           key={index}
-                          id={`color-${color}`}
+                          id={`color-${color.value}`}
                           name="item_colors"
                           type="checkbox"
                           variant={
-                            currentColor.includes(color.title)
+                            currentColor.includes(color.value + '-' + color.title)
                               ? "secondary"
                               : "outline-secondary"
                           }
-                          value={color.slug}
-                          onClick={() => toggleColor(color.title)}
+                          value={color.value}
+                          onClick={() => toggleColor(color.value + '-' + color.title)}
                         >
                           {color.title.toUpperCase()}
                         </ToggleButton>

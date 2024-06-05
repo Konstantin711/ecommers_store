@@ -11,6 +11,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSerializerWithToken
 
+from time import time
+
 
 
 @api_view(['POST'])
@@ -149,9 +151,13 @@ def addNewItem(request):
     else:
         data = request.data.dict()
 
+        def slug_generator():
+            digits = str(time())[-5:-1]
+            return f'TSHRT{digits}PRNT'
 
-        print(data, 'Initial')
+        print(data, 'DATA BEFORE')
 
+        data['slug'] = slug_generator()
         data['parent_type'] = json.loads(data.get('parent_type', '{}'))
         data['category'] = json.loads(data.get('category', '[]'))
         data['item_sizes'] = json.loads(data.get('item_sizes', '[]'))
@@ -159,7 +165,6 @@ def addNewItem(request):
 
         files = request.FILES.getlist('images[0]')
         data['images'] = files[0]
-        print(data['images'], 'FILES')
 
         serialized_data = serializers.ItemSerializer(data=data)
         print(serialized_data.is_valid())
