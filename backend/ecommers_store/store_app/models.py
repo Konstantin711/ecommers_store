@@ -64,6 +64,16 @@ class ItemType(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title} - {self.slug}"
+    
+    
+class ItemSubCategory(models.Model):
+    """Means oversize, casual, fit ..."""
+
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=64)
+
+    def __str__(self) -> str:
+        return f"{self.title} - {self.slug}"
 
 
 class ParentType(models.Model):
@@ -114,8 +124,9 @@ class Item(models.Model):
 
     parent_type = models.ForeignKey(ParentType, on_delete=models.CASCADE)
     category = models.ManyToManyField(ItemType)
+    sub_category = models.ManyToManyField(ItemSubCategory)
     item_sizes = models.ManyToManyField(ItemSizes)
     item_colors = models.ManyToManyField(ItemColors)
 
     def __str__(self) -> str:
-        return f"{self.title} - {self.slug}"
+        return f"{self.title} - {self.slug} - {self.parent_type.title}"
