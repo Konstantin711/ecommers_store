@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Card, Button, Badge, Row, Col, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 import Sidebar from "../../components/common_components/Sidebar";
+import Loader from "../../components/common_components/Loader";
+import Message from "../../components/common_components/Message";
+import { getCatalogPageData } from "../../redux/actions/catalogPageActions";
+
 
 const product = {
   name: "Nike Dunk Low Retro",
@@ -13,6 +20,16 @@ const product = {
 };
 
 function CatalogPage() {
+
+  const dispatch = useDispatch();
+  const catalogPageData = useSelector((state) => state.catalogPage);
+  const { loading, error, data } = catalogPageData;
+
+  useEffect(() => {
+    dispatch(getCatalogPageData());
+  }, [dispatch]);
+
+
   return (
     <>
         <Container fluid>

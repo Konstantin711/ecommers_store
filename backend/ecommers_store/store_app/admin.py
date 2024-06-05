@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
-from .models import UserProfile, ItemType, ParentType, Item, ItemSizes, ItemColors
+from .models import UserProfile, ItemType, ParentType, Item, ItemSizes, ItemColors, ItemSubCategory
 
 
 class UserProfileAdmin(BaseUserAdmin):
@@ -46,3 +46,5 @@ admin.site.register(ParentType)
 admin.site.register(Item)
 admin.site.register(ItemSizes)
 admin.site.register(ItemColors)
+admin.site.register(ItemSubCategory)
+

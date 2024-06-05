@@ -4,11 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 
 import { newItemPageReducer } from './reducers/newItemPageReducer'
+import { catalogPageReducer } from './reducers/catalogPageReducers'
 
 
 
 const reducer = combineReducers({
     itemPage: newItemPageReducer,
+    catalogPage: catalogPageReducer,
 })
 
 
