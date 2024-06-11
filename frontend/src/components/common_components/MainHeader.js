@@ -14,7 +14,12 @@ function MainHeader() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">MATCH TOBI</Navbar.Brand>
+        <Navbar.Brand href="/" style={{ 
+          color: "#0080ff",
+          fontWeight: 400,
+          fontSize: 22
+
+         }}>MATCH TOBI</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
