@@ -7,9 +7,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.getAllURIs, name='get all uri'),
-    path('<str:slug>/all/', views.getAllByParent, name='get all by parent'),
-    path('<str:p_slug>/<str:t_slug>/all/', views.getAllByType, name='get all by type'),
-    path('<str:slug>/', views.getItemBySlug, name='get item by slug'),
+    path('catalog/<str:slug>/all/', views.getCatalogData, name='get_catalog_data_without_type'),
+    path('catalog/<str:slug>/<str:type>/all/', views.getCatalogData, name='get_catalog_data_with_type'),
+    path('catalog/<str:slug>/', views.getItemBySlug, name='get item by slug'),
     path('add/new-item/', views.addNewItem, name='add new item'),
 ]
 

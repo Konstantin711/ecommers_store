@@ -38,6 +38,16 @@ function App() {
           }
         />
         <Route
+          path="/catalog/:slug/:type/all"
+          element={
+            <CommonLayout>
+              <Routes>
+                <Route index element={<CatalogPage />} />
+              </Routes>
+            </CommonLayout>
+          }
+        />
+        <Route
           path="/catalog/:slug"
           element={
             <CommonLayout>

@@ -64,51 +64,56 @@ def getAllURIs(request):
 
 
 @api_view()
-def getAllByParent(request, slug):
+def getCatalogData(request, slug, type=None):
     """
     Get all elements by parent slug. URI Example: /api/men/all
     """
+    
     if slug not in ['men', 'women']:
         return Response(
             {'message': f"Resource not found. Please use: men or women"},
             status=status.HTTP_404_NOT_FOUND
         )
-
-    all_by_parent = models.Item.objects.filter(parent_type__slug=str(slug))
-
-    serialized_data = serializers.ItemSerializer(all_by_parent, many=True).data
+    
+    if type is not None:
+        all_by_type = models.Item.objects.filter(
+            parent_type__slug=str(slug), sub_category__slug=str(type))
+        serialized_data = serializers.ItemSerializer(all_by_type, many=True).data
+    else:
+        all_by_parent = models.Item.objects.filter(parent_type__slug=str(slug))
+        serialized_data = serializers.ItemSerializer(all_by_parent, many=True).data
 
     return Response(
         dict(message='Data collected by parent slug',
              data=serialized_data))
 
 
-@api_view()
-def getAllByType(request, p_slug, t_slug):
-    """
-    Get all elements by parent and type slug. URI Example: /api/men/shirt/all
-    """
+# @api_view()
+# def getAllByType(request, p_slug, t_slug):
+#     """
+#     Get all elements by parent and type slug. URI Example: /api/men/shirt/all
+#     """
 
-    ts = AllTypeSlugs()
-    ps = AllParentSlugs()
+#     ts = AllTypeSlugs()
+#     ps = AllParentSlugs()
 
-    type_slugs = asdict(ts)
-    parent_slugs = asdict(ps)
+#     type_slugs = asdict(ts)
+#     parent_slugs = asdict(ps)
 
-    if p_slug not in parent_slugs.values() or t_slug not in type_slugs.values():
-        return Response(
-            {'message': f"Resource not found. Use one of: {type_slugs.values()}"},
-            status=status.HTTP_404_NOT_FOUND)
+#     if p_slug not in parent_slugs.values() or t_slug not in type_slugs.values():
+#         return Response(
+#             {'message': f"Resource not found. Use one of: {type_slugs.values()}"},
+#             status=status.HTTP_404_NOT_FOUND)
 
-    all_by_type = models.Item.objects.filter(
-        parent_type__slug=str(p_slug), item_type__slug=str(t_slug)
-    )
+#     all_by_type = models.Item.objects.filter(
+#         parent_type__slug=str(p_slug), item_type__slug=str(t_slug)
+#     )
 
-    serialized_data = serializers.ItemSerializer(all_by_type, many=True).data
+#     serialized_data = serializers.ItemSerializer(all_by_type, many=True).data
 
-    return Response(
-        dict(message='Data collected by parent and type slug',
-             data=serialized_data))
+#     return Response(
+#         dict(message='Data collected by parent and type slug',
+#              data=serialized_data))
 
 
 @api_view()
