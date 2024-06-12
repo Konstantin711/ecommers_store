@@ -10,6 +10,7 @@ urlpatterns = [
     path('catalog/<str:slug>/all/', views.getCatalogData, name='get_catalog_data_without_type'),
     path('catalog/<str:slug>/<str:type>/all/', views.getCatalogData, name='get_catalog_data_with_type'),
     path('catalog/<str:slug>/', views.getItemBySlug, name='get item by slug'),
+    path('get/detailed/detailed/', views.getDetailedCatalogData, name='get detailed catalog data'),
     path('add/new-item/', views.addNewItem, name='add new item'),
 ]
 

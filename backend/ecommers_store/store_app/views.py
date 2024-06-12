@@ -3,6 +3,8 @@ import json
 from . import models
 from . import serializers
 
+from django.db.models import Q
+
 from django.contrib.auth.hashers import make_password
 
 from rest_framework.decorators import api_view, permission_classes
@@ -83,6 +85,52 @@ def getCatalogData(request, slug, type=None):
         all_by_parent = models.Item.objects.filter(parent_type__slug=str(slug))
         serialized_data = serializers.ItemSerializer(all_by_parent, many=True).data
 
+    return Response(
+        dict(message='Data collected by parent slug',
+             data=serialized_data))
+
+
+@api_view(['POST'])
+def getDetailedCatalogData(request):
+    """
+    Detailed catalog data. URI Example: catalog/detailed/
+    """
+    received_data = request.data.copy()
+    print(received_data['catalog_data'])
+
+    slug = received_data.get('slug', None)
+    p_type = received_data.get('type', None)
+    
+    categories = []
+    print_types = []
+
+
+
+    for d in received_data['catalog_data']:
+        if d in ['oversize', 'casual', 'fit']:
+            categories.append(d)
+        else:
+            print_types.append(d)
+
+    print(categories, print_types)
+
+    if len(categories) >= 1 or len(print_types) >= 1:
+        detailed_categories = models.Item.objects.filter(
+            Q(print_category__in=print_types) | Q(sub_category__slug__in=categories)
+        )
+    else:
+        if p_type is not None:
+            detailed_categories = models.Item.objects.filter(
+                parent_type__slug=str(slug), sub_category__slug=str(p_type))
+            serialized_data = serializers.ItemSerializer(detailed_categories, many=True).data
+        else:
+            detailed_categories = models.Item.objects.filter(parent_type__slug=str(slug))
+            serialized_data = serializers.ItemSerializer(detailed_categories, many=True).data
+
+
+    serialized_data = serializers.ItemSerializer(detailed_categories, many=True).data
+
+    print(serialized_data)
     return Response(
         dict(message='Data collected by parent slug',
              data=serialized_data))
