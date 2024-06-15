@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { newItemPageReducer } from './reducers/newItemPageReducer'
 import { catalogPageReducer } from './reducers/catalogPageReducers'
 import { itemPageReducer } from './reducers/itemPageReducers'
+import { sendToCartReducer } from './reducers/itemPageReducers'
 
 
 
@@ -13,6 +14,7 @@ const reducer = combineReducers({
     itemPage: newItemPageReducer,
     catalogPage: catalogPageReducer,
     itemPage: itemPageReducer,
+    sendToCart: sendToCartReducer,
 })
 
 

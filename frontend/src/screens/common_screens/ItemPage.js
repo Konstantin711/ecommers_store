@@ -8,7 +8,9 @@ import Loader from "../../components/common_components/Loader";
 import Message from "../../components/common_components/Message";
 import { Container, Row, Col, Image, Button, ToggleButton, Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { getItemPageData } from "../../redux/actions/itemPageActions";
+import { sendToCart } from '../../redux/actions/itemPageActions'
 
 function ItemPage() {
   const dispatch = useDispatch();
@@ -27,25 +29,45 @@ function ItemPage() {
 
   const handleChangeComplete = (color) => {
     setColor(color.hex);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      item_colors: color.hex,
+    }));
   };
 
   const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50'];
 
-  const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
-  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState("");
+
+  const [formData, setFormData] = useState({
+    slug: "",
+    item_sizes: "",
+    item_colors: "",
+  });
 
   const toggleSize = (size) => {
-    const currentIndex = selectedSizes.indexOf(size);
-    const newSelectedSizes = [...selectedSizes];
-
-    if (currentIndex === -1) {
-      newSelectedSizes.push(size);
-    } else {
-      newSelectedSizes.splice(currentIndex, 1);
-    }
-
-    setSelectedSizes(newSelectedSizes);
+    setSelectedSizes(size);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      item_sizes: size,
+    }));
   };
+
+  useEffect(() => {
+    if (data && data.data && data.data.slug) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        slug: data.data.slug,
+      }));
+    }
+  }, [data]);
+
+  const sendToCartHandler = () => {
+    console.log(formData)
+
+    dispatch(sendToCart(formData))
+  }
 
   return (
     <Container>
@@ -98,7 +120,9 @@ function ItemPage() {
                         <span className="price-title"> Вартість: </span> {data.data.price} грн{" "}
                       </span>
                       <div className="uk-text-right buy-block">
-                        <Button className="mt-2 buy-button-item-page">
+                        <Button 
+                          className="mt-2 buy-button-item-page"
+                          onClick={sendToCartHandler}>
                           Купити
                         </Button>
                       </div>
@@ -114,7 +138,7 @@ function ItemPage() {
                       name="item_sizes"
                       type="checkbox"
                       variant={
-                        selectedSizes.includes(size.title)
+                        selectedSizes.startsWith(size.title)
                           ? "secondary"
                           : "outline-secondary"
                       }

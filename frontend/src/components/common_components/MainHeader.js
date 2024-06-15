@@ -41,7 +41,9 @@ function MainHeader() {
             </NavDropdown>
           </Nav>
           <div>
-            <i className="bi bi-cart"></i>
+            <a href="/cart">
+              <i className="bi bi-cart"></i>
+            </a>
           </div>
         </Navbar.Collapse>
       </Container>

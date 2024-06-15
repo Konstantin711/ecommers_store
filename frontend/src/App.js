@@ -9,9 +9,10 @@ import AboutPage from "./screens/common_screens/AboutUs";
 import ContactPage from "./screens/common_screens/DeliveryPayment";
 import CatalogPage from "./screens/common_screens/CatalogPage";
 import ItemPage from "./screens/common_screens/ItemPage";
+import CartPage from './screens/common_screens/CartPage';
 
-import AdminPage from './screens/admin_screens/AdminPage'
-import NewItemPage from './screens/admin_screens/NewItemPage'
+import AdminPage from './screens/admin_screens/AdminPage';
+import NewItemPage from './screens/admin_screens/NewItemPage';
 
 function App() {
   return (
@@ -67,16 +68,16 @@ function App() {
             </CommonLayout>
           }
         />
-        {/* <Route
+        <Route
           path="/cart"
           element={
             <CommonLayout>
               <Routes>
-                <Route index element={<CartScreen />} />
+                <Route index element={<CartPage />} />
               </Routes>
             </CommonLayout>
           }
-        /> */}
+        />
         <Route
           path="/contact"
           element={
