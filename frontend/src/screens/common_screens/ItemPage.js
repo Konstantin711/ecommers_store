@@ -15,8 +15,13 @@ import { sendToCart } from '../../redux/actions/itemPageActions'
 function ItemPage() {
   const dispatch = useDispatch();
   const itemPageData = useSelector((state) => state.itemPage);
+  const itemsInCart = useSelector((state) => state.sendToCart);
+  // це не працює
+  const { cartLoading, cartData, cartError } = itemsInCart;
   const { loading, error, data } = itemPageData;
   const { slug } = useParams();
+
+  const [cartErrors, setCartErrors] = useState("");
 
   useEffect(() => {
     dispatch(getItemPageData(slug));
@@ -42,6 +47,8 @@ function ItemPage() {
 
   const [formData, setFormData] = useState({
     slug: "",
+    title: "",
+    image: "",
     item_sizes: "",
     item_colors: "",
   });
@@ -59,6 +66,8 @@ function ItemPage() {
       setFormData((prevFormData) => ({
         ...prevFormData,
         slug: data.data.slug,
+        title: data.data.title,
+        image: data.data.images
       }));
     }
   }, [data]);
@@ -76,7 +85,7 @@ function ItemPage() {
           <Loader />
         ) : error ? (
           <Message variant="danger">{error.message ? error.message : error}</Message>
-        ) : (
+        ):(
           data && data.data && (
             <React.Fragment key={data.data.id}>
               <Col sm={12} md={12} lg={6} xl={6} className="me-5 mt-2">
@@ -109,6 +118,7 @@ function ItemPage() {
                 <div>
                   <div className="mt-3 item-description">
                     {data.data.description}
+                    {cartError && <Message variant="danger">{cartError.slug}</Message>}
                   </div>
                   <Row className="mt-3">
                     <Col className="mt-3 item-composition">

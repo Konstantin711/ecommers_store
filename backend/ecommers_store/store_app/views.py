@@ -130,11 +130,25 @@ def getDetailedCatalogData(request):
 
     serialized_data = serializers.ItemSerializer(detailed_categories, many=True).data
 
-    print(serialized_data)
     return Response(
         dict(message='Data collected by parent slug',
              data=serialized_data))
 
+
+@api_view(["POST"])
+def get_current_price(request):
+    slugs = request.data.copy()
+
+    items = models.Item.objects.filter(slug__in=slugs)
+    serialized_data = serializers.ItemSerializer(items, many=True).data
+    
+    prices = []
+    for val in serialized_data:
+        prices.append({"slug": val['slug'], "price": val["price"]})
+
+    return Response(
+        dict(message='Updated price values for cart',
+             data=prices))
 
 # @api_view()
 # def getAllByType(request, p_slug, t_slug):

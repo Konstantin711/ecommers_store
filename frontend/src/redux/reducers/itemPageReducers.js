@@ -35,18 +35,39 @@ import {
     switch (action.type) {
   
       case SEND_TO_CART_SUCCESS:
-        const item = action.payload
-  
-        // подумати про перевірку наявності товару
-        // const existItem = state.CartItems.find(item)
-  
-        return { 
+      const item = action.payload;
+      
+      const existItemIndex = state.cartItems.findIndex(
+        cartItem => 
+          cartItem.slug === item.slug && 
+          cartItem.size === item.size &&
+          cartItem.color === item.color
+      );
+
+      let newCartItems;
+
+      if (existItemIndex >= 0) {
+        newCartItems = [...state.cartItems];
+        newCartItems[existItemIndex] = item;
+
+        return {
+          loading: false,
           ...state,
-          cartItems: [...state.cartItems, item]
-        }
+          cartItems: newCartItems,
+          error: "Товар вже доданий до кошика",
+        };
+
+      } else {
+        newCartItems = [...state.cartItems, item];
+      }
+
+      return { 
+        ...state,
+        cartItems: newCartItems
+      };
   
       case SEND_TO_CART_FAIL:
-        return { loading: false, CartItems: action.payload }
+        return { loading: false, error: action.payload }
   
       default:
         return state

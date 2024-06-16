@@ -28,6 +28,8 @@ export const sendToCart = (data) => async (dispatch, getState) => {
         type: SEND_TO_CART_SUCCESS,
         payload: {
           slug: data.slug,
+          title: data.title,
+          image: data.image,
           size: data.item_sizes,
           color: data.item_colors,
         },
