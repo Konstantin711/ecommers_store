@@ -104,8 +104,6 @@ def getDetailedCatalogData(request):
     categories = []
     print_types = []
 
-
-
     for d in received_data['catalog_data']:
         if d in ['oversize', 'casual', 'fit']:
             categories.append(d)
@@ -195,9 +193,27 @@ def getItemBySlug(request, slug):
 def createNewOrder(request):
     print(request.data)
 
+    new_order = request.data.dict()
+    new_order['ordered_items'] = json.loads(new_order.get('ordered_items', '[]'))
+
+    serialized_data = serializers.OrdersSerializer(data=new_order, many=False)
+    print(serialized_data.error_messages)
+
+    if serialized_data.is_valid():
+        serialized_data.save()
+        return Response(
+            dict(
+                message='New order was created',
+                status=status.HTTP_201_CREATED
+            )
+        )
+
     return Response(
-        dict(message='Item by concrete slug is returned',
-             data='serialized_data'))
+        dict(
+            message='New order was not created',
+            status=status.HTTP_400_BAD_REQUEST
+            )
+        )
 
 
 # ADMIN API
@@ -243,8 +259,6 @@ def addNewItem(request):
         data['images'] = files[0]
 
         serialized_data = serializers.ItemSerializer(data=data)
-        print(serialized_data.is_valid())
-        print(serialized_data.errors)
 
         if serialized_data.is_valid():
             serialized_data.save()

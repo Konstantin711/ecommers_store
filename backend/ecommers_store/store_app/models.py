@@ -134,20 +134,20 @@ class Item(models.Model):
 
 class Orders(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
-    order_status = models.CharField(max_length=64, blank=True)
-    order_sum = models.FloatField()
+    order_status = models.CharField(max_length=64, blank=True, default='new')
+    order_sum = models.FloatField(blank=True, null=True)
     # order_id
 
     city = models.CharField(max_length=128, blank=True)
-    post_department = models.CharField(max_length=128, blank=True)
-    pay_type = models.CharField(max_length=32, blank=True)
+    department = models.CharField(max_length=128, blank=True)
+    payment_type = models.CharField(max_length=32, blank=True)
     customer_name = models.CharField(max_length=64, blank=True)
     customer_surname = models.CharField(max_length=64, blank=True)
     customer_phone = models.CharField(max_length=16, blank=True)
-    customer_email = models.CharField(max_length=128, blank=True)
+    customer_post = models.CharField(max_length=128, blank=True)
 
     # ???
-    items = models.CharField(max_length=128, blank=True)
+    ordered_items = models.JSONField(max_length=1024, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.created_at} - {self.city} {self.post_department}'
+        return f'{self.created_at} - {self.city} {self.department}'

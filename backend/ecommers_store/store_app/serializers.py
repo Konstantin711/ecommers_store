@@ -94,6 +94,14 @@ class ColorsSerializer(serializers.ModelSerializer):
         fields = ['title', 'value', 'color_hex']
 
 
+class OrdersSerializer(serializers.ModelSerializer):
+    " Serializer for Order"
+
+    class Meta:
+        model = Orders
+        fields = '__all__'
+
+
 class ItemSerializer(serializers.ModelSerializer):
     """Serializer for Item with relations"""
 
