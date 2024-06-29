@@ -191,6 +191,15 @@ def getItemBySlug(request, slug):
              data=serialized_data))
 
 
+@api_view(["POST"])
+def createNewOrder(request):
+    print(request.data)
+
+    return Response(
+        dict(message='Item by concrete slug is returned',
+             data='serialized_data'))
+
+
 # ADMIN API
 
 @api_view(["POST", "GET"])
