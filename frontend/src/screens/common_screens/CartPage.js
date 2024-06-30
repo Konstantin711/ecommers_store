@@ -8,8 +8,10 @@ import { AsyncPaginate } from "react-select-async-paginate";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import CartItem from "../../components/common_components/cartItem";
-import { getNovaPostCities,getNovaPostDepartments, getCartPageData }
+import { getNovaPostCities,getNovaPostDepartments, getCartPageData, createNewOrder }
  from '../../redux/actions/cartPageActions'
+
+import axios from 'axios'
 
 
 
@@ -24,30 +26,12 @@ function Cart() {
 
   useEffect(() => {
     const dataFromLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
-    console.log(dataFromLocalStorage)
     dispatch(getCartPageData(dataFromLocalStorage));
 
   }, [dispatch]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // CHOSEN ITEMS
+
   // ORDER CONFIRMATION BLOCK
-  
   const { loading, error, novaPostData } = useSelector(
     (state) => state.confirmationReducer
   );
@@ -115,18 +99,88 @@ function Cart() {
   const handlePayTypeChange = (e) => {
     setCardPay(e.target.value);
   };
-
   // ORDER CONFIRMATION BLOCK
+
+  // Sending handler
+  const [formData, setFormData] = useState({
+    city: "",
+    department: "",
+    payment_type: "",
+    customer_name: "",
+    customer_surname: "",
+    customer_phone: "",
+    customer_post: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "payment_type") {
+      const selectedOption = e.target.selectedOptions[0];
+      console.log(selectedOption.label, 'from pay type')
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: selectedOption.label,
+      }));
+    } 
+    else {
+      console.log(value)
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+
+const cityHandler = async (selectedOption) => {
+  console.log(selectedOption.value)
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        "city": selectedOption.value,
+      }));
+}
+
+const departmentHandler = async (selectedOption) => {
+  console.log(selectedOption.value)
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        "department": selectedOption.value,
+      }));
+}
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  console.log(formData)
+
+  const data = new FormData();
+  data.append('city', formData.city);
+  data.append('department', formData.department);
+  data.append('payment_type', formData.payment_type);
+  data.append('customer_name', formData.customer_name);
+  data.append('customer_surname', formData.customer_surname);
+  data.append('customer_phone', formData.customer_phone);
+  data.append('customer_post', formData.customer_post);
+
+  data.append('ordered_items', JSON.stringify(cartPageItems))
+
+  dispatch(createNewOrder(data))
+
+  };
+
+
 
   return (
     <Container>
       <Row>
         <Col md={6}>
           <h3>Обрані товари</h3>
-          {cartPageItems.map((item, index) => (
-            <CartItem key={index} item={item} />
-          ))}
+          {Object.keys(cartPageItems).length === 0  ? (
+            <p>Кошик пустий</p>
+          ) : (
+            cartPageItems.map((item, index) => (
+              <CartItem key={index} item={item} />
+            ))
+          )}
         </Col>
+
         <Col md={6}>
           <h3>Контакти замовника</h3>
           <Form>
@@ -134,11 +188,12 @@ function Cart() {
               <Form.Label>Місто*</Form.Label>
               <AsyncPaginate
                 required
-                id="city"
+                name="delivery_city"
                 value={selectedCity}
                 loadOptions={loadCityOptions}
                 onChange={(selectedOption) => {
                   setSelectedCity(selectedOption);
+                  cityHandler(selectedOption);
                 }}
               />
             </Form.Group>
@@ -147,12 +202,13 @@ function Cart() {
               <Form.Label>Відділення*</Form.Label>
               <Select
                 required
-                id="department"
+                name="post_department"
                 value={selectedDepartment}
                 options={departments}
                 isSearchable
                 onChange={(selectedOption) => {
                   setSelectedDepartment(selectedOption);
+                  departmentHandler(selectedOption);
                 }}
                 isDisabled={!selectedCity.label}
               />
@@ -161,8 +217,11 @@ function Cart() {
               <Form.Label>Спосіб оплати*</Form.Label>
               <Form.Select
                 required
-                id="pay_type"
-                onChange={handlePayTypeChange}
+                name="payment_type"
+                onChange={(event) => {
+                  handlePayTypeChange(event);
+                  handleChange(event);
+                }}
                 value={cardPay}
               >
                 <option key={1} value={"Оплата при отриманні"}>
@@ -183,9 +242,10 @@ function Cart() {
               <Form.Label>Ім'я*</Form.Label>
               <Form.Control
                 required
-                type="name"
+                type="input"
                 placeholder="Введіть ім'я"
-                id="name"
+                onChange={handleChange}
+                name="customer_name"
               />
             </Form.Group>
 
@@ -193,9 +253,10 @@ function Cart() {
               <Form.Label>Прізвище*</Form.Label>
               <Form.Control
                 required
-                type="surname"
+                type="input"
                 placeholder="Введіть прізвище"
-                id="surname"
+                name="customer_surname"
+                onChange={handleChange}
               />
             </Form.Group>
 
@@ -203,9 +264,10 @@ function Cart() {
               <Form.Label>Телефон*</Form.Label>
               <Form.Control
                 required
-                type="phone"
+                type="input"
                 placeholder="Введіть телефон"
-                id="phone"
+                name="customer_phone"
+                onChange={handleChange}
               />
             </Form.Group>
 
@@ -213,16 +275,17 @@ function Cart() {
               <Form.Label>Пошта*</Form.Label>
               <Form.Control
                 required
-                type="email"
+                type="input"
                 placeholder="Введіть пошту"
-                id="email"
+                name="customer_post"
+                onChange={handleChange}
               />
             </Form.Group>
 
             <Button
               className="mt-3"
               type="submit"
-              // onClick={(e) => confirmOrderHandler(e)}
+              onClick={(e) => handleSubmit(e)}
             >
               Оформити
             </Button>

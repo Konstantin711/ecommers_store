@@ -1,17 +1,17 @@
 import {
   UPDATE_CART_REQUEST,
-	UPDATE_CART_FAIL,
-	DELETE_FROM_CART,
-
-	CITY_LIST_REQUEST,
+  UPDATE_CART_FAIL,
+  DELETE_FROM_CART,
+  CITY_LIST_REQUEST,
   CITY_LIST_SUCCESS,
   CITY_LIST_FAIL,
-
   DEPARTMENT_LIST_REQUEST,
   DEPARTMENT_LIST_SUCCESS,
-  DEPARTMENT_LIST_FAIL
+  DEPARTMENT_LIST_FAIL,
+  CREATE_NEW_ORDER_REQUEST,
+  CREATE_NEW_ORDER_SUCCESS,
+  CREATE_NEW_ORDER_FAIL,
 } from "../constants/cartPageConstants";
-
 
 export const cartPageReducer = (state = { cartPageItems: [] }, action) => {
   switch (action.type) {
@@ -19,21 +19,36 @@ export const cartPageReducer = (state = { cartPageItems: [] }, action) => {
       return {
         loading: true,
         ...state,
-        cartPageItems: action.payload
+        cartPageItems: action.payload,
       };
 
     case UPDATE_CART_FAIL:
       return {
         loading: false,
-        error: action.payload,
+        cartPageItems: action.payload,
       };
 
     case DELETE_FROM_CART:
-
       return {
         ...state,
-        cartPageItems: state.cartPageItems.filter((_, index) => index !== action.payload),
+        cartPageItems: state.cartPageItems.filter(
+          (_, index) => index !== action.payload
+        ),
       };
+
+    case CREATE_NEW_ORDER_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case CREATE_NEW_ORDER_SUCCESS:
+      return {
+        loading: false,
+        cartPageItems: [],
+      };
+
+    case CREATE_NEW_ORDER_FAIL:
+      return {};
 
     default:
       return state;
@@ -48,7 +63,8 @@ export const orderConfirmationReducer = (
   const { novaPostData } = state;
 
   switch (action.type) {
-    case CITY_LIST_REQUEST || DEPARTMENT_LIST_REQUEST:
+    case CITY_LIST_REQUEST:
+    case DEPARTMENT_LIST_REQUEST:
       return { ...state, loading: true };
 
     case CITY_LIST_SUCCESS:

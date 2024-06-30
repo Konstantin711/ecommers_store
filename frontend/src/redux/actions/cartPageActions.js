@@ -9,7 +9,11 @@ import {
 
     DEPARTMENT_LIST_REQUEST,
     DEPARTMENT_LIST_SUCCESS,
-    DEPARTMENT_LIST_FAIL
+    DEPARTMENT_LIST_FAIL,
+
+	CREATE_NEW_ORDER_REQUEST,
+	CREATE_NEW_ORDER_SUCCESS,
+	CREATE_NEW_ORDER_FAIL,
 } from '../constants/cartPageConstants'
 
 import axios from 'axios'
@@ -33,21 +37,23 @@ const updatePricesInLocalData = (localData, updatedPrices) => {
 export const getCartPageData = (dataFromLocalStorage) => async (dispatch) => {
 	// на цьому моменті ми сходимо за вточненням ціни
 	const slugs = [];
-	for (let i = 0; i < dataFromLocalStorage.length; i++){
-		if (slugs.includes(dataFromLocalStorage[i]['slug'])){
-			continue
-		}
-		else{
-			slugs.push(dataFromLocalStorage[i]['slug'])
+	if (dataFromLocalStorage != null ) {
+		for (let i = 0; i < dataFromLocalStorage.length; i++){
+			if (slugs.includes(dataFromLocalStorage[i]['slug'])){
+				continue
+			}
+			else{
+				slugs.push(dataFromLocalStorage[i]['slug'])
+			}
 		}
 	}
+	
 	try{
 		const response = await axios.post(`api/get_current_price/`, slugs)
-		console.log(response.data.data, 'after from server')
-		console.log(dataFromLocalStorage, 'local storage')
 		
 		const updatedPrices = response.data.data;
 		const updatedLocalData = updatePricesInLocalData(dataFromLocalStorage, updatedPrices);
+		console.log(updatedLocalData ,"FROM ACTIONS")
 		dispatch({ type: UPDATE_CART_REQUEST, payload: updatedLocalData})
 
 	}catch(error){
@@ -67,12 +73,37 @@ export const deleteItemFromCart = (id) => async (dispatch, getState) => {
 
 		dispatch({ type: 'QTY_REMOVE_ITEM', payload: 1 })
 
-
 	}catch(error){
 		console.log(error)
 		dispatch({ type: UPDATE_CART_FAIL, payload: error })
     }
 }
+
+export const createNewOrder = (data) => async (dispatch) => {
+	try {
+		dispatch({ type: CREATE_NEW_ORDER_REQUEST })
+
+		const response = await axios.post(
+		  "api/create_order/",
+		  data,
+		  {
+			headers: {
+			  'Content-Type': 'multipart/form-data',
+			},
+		  }
+		);
+		
+		localStorage.removeItem(
+			"cartItems",
+		  );
+
+		dispatch({ type: CREATE_NEW_ORDER_SUCCESS, payload: response.data })
+
+	  } catch (error) {
+		dispatch({ type: CREATE_NEW_ORDER_FAIL, payload: error })
+	  }
+}
+
 
 // NOVA POSTA BLOCK
 export const getNovaPostCities = (city) => async (dispatch) => {

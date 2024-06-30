@@ -108,7 +108,6 @@ function NewItemPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     const data = new FormData();
     data.append('title', formData.title);
