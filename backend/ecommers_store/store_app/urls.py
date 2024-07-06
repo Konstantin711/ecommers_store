@@ -11,9 +11,11 @@ urlpatterns = [
     path('catalog/<str:slug>/<str:type>/all/', views.getCatalogData, name='get_catalog_data_with_type'),
     path('catalog/<str:slug>/', views.getItemBySlug, name='get item by slug'),
     path('get/detailed/detailed/', views.getDetailedCatalogData, name='get detailed catalog data'),
-    path('add/new-item/', views.addNewItem, name='add new item'),
+    path('create_order/', views.createNewOrder, name='creates new order'),
     path('get_current_price/', views.get_current_price, name='current price for items in cart'),
-    path('create_order/', views.createNewOrder, name='creates new order')
+
+    path('admin/', views.getAdminSite, name='Get basic admin page'),
+    path('add/new-item/', views.addNewItem, name='add new item'),
 ]
 
 if settings.DEBUG:

@@ -169,130 +169,124 @@ const handleSubmit = async (e) => {
 
   return (
     <Container>
-      <Row>
-        <Col md={6}>
-          <h3>Обрані товари</h3>
-          {Object.keys(cartPageItems).length === 0  ? (
-            <p>Кошик пустий</p>
-          ) : (
-            cartPageItems.map((item, index) => (
-              <CartItem key={index} item={item} />
-            ))
-          )}
-        </Col>
-
-        <Col md={6}>
-          <h3>Контакти замовника</h3>
-          <Form>
-            <Form.Group>
-              <Form.Label>Місто*</Form.Label>
-              <AsyncPaginate
-                required
-                name="delivery_city"
-                value={selectedCity}
-                loadOptions={loadCityOptions}
-                onChange={(selectedOption) => {
-                  setSelectedCity(selectedOption);
-                  cityHandler(selectedOption);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mt-3">
-              <Form.Label>Відділення*</Form.Label>
-              <Select
-                required
-                name="post_department"
-                value={selectedDepartment}
-                options={departments}
-                isSearchable
-                onChange={(selectedOption) => {
-                  setSelectedDepartment(selectedOption);
-                  departmentHandler(selectedOption);
-                }}
-                isDisabled={!selectedCity.label}
-              />
-            </Form.Group>
-            <Form.Group className="mt-3">
-              <Form.Label>Спосіб оплати*</Form.Label>
-              <Form.Select
-                required
-                name="payment_type"
-                onChange={(event) => {
-                  handlePayTypeChange(event);
-                  handleChange(event);
-                }}
-                value={cardPay}
+    <Row>
+      {Object.keys(cartPageItems).length === 0 ? (
+        <p>Кошик пустий</p>
+      ) : (
+        <>
+          <Col md={6}>
+            <h3>Обрані товари</h3>
+            {Object.keys(cartPageItems).map((key, index) => (
+              <CartItem key={index} item={cartPageItems[key]} />
+            ))}
+          </Col>
+          <Col md={6}>
+            <h3>Контакти замовника</h3>
+            <Form>
+              <Form.Group>
+                <Form.Label>Місто*</Form.Label>
+                <AsyncPaginate
+                  required
+                  name="delivery_city"
+                  value={selectedCity}
+                  loadOptions={loadCityOptions}
+                  onChange={(selectedOption) => {
+                    setSelectedCity(selectedOption);
+                    cityHandler(selectedOption);
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mt-3">
+                <Form.Label>Відділення*</Form.Label>
+                <Select
+                  required
+                  name="post_department"
+                  value={selectedDepartment}
+                  options={departments}
+                  isSearchable
+                  onChange={(selectedOption) => {
+                    setSelectedDepartment(selectedOption);
+                    departmentHandler(selectedOption);
+                  }}
+                  isDisabled={!selectedCity.label}
+                />
+              </Form.Group>
+              <Form.Group className="mt-3">
+                <Form.Label>Спосіб оплати*</Form.Label>
+                <Form.Select
+                  required
+                  name="payment_type"
+                  onChange={(event) => {
+                    handlePayTypeChange(event);
+                    handleChange(event);
+                  }}
+                  value={cardPay}
+                >
+                  <option key={1} value={"Оплата при отриманні"}>
+                    Оплата при отриманні
+                  </option>
+                  <option key={2} value={"Оплата карткою"}>
+                    Оплата карткою
+                  </option>
+                </Form.Select>
+              </Form.Group>
+              {cardPay === "Оплата карткою" && (
+                <p>Менеджер звʼяжеться з вами для уточнення деталей</p>
+              )}
+              <Form.Group className="mt-3">
+                <Form.Label>Ім'я*</Form.Label>
+                <Form.Control
+                  required
+                  type="input"
+                  placeholder="Введіть ім'я"
+                  onChange={handleChange}
+                  name="customer_name"
+                />
+              </Form.Group>
+              <Form.Group className="mt-3">
+                <Form.Label>Прізвище*</Form.Label>
+                <Form.Control
+                  required
+                  type="input"
+                  placeholder="Введіть прізвище"
+                  name="customer_surname"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mt-3">
+                <Form.Label>Телефон*</Form.Label>
+                <Form.Control
+                  required
+                  type="input"
+                  placeholder="Введіть телефон"
+                  name="customer_phone"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className="mt-3">
+                <Form.Label>Пошта*</Form.Label>
+                <Form.Control
+                  required
+                  type="input"
+                  placeholder="Введіть пошту"
+                  name="customer_post"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Button
+                className="mt-3"
+                type="submit"
+                onClick={(e) => handleSubmit(e)}
               >
-                <option key={1} value={"Оплата при отриманні"}>
-                  {" "}
-                  Оплата при отриманні
-                </option>
-                <option key={2} value={"Оплата карткою"}>
-                  Оплата карткою
-                </option>
-              </Form.Select>
-            </Form.Group>
-
-            {cardPay === "Оплата карткою" && (
-              <p>Менеджер звʼяжеться з вами для уточнення деталей</p>
-            )}
-
-            <Form.Group className="mt-3">
-              <Form.Label>Ім'я*</Form.Label>
-              <Form.Control
-                required
-                type="input"
-                placeholder="Введіть ім'я"
-                onChange={handleChange}
-                name="customer_name"
-              />
-            </Form.Group>
-
-            <Form.Group className="mt-3">
-              <Form.Label>Прізвище*</Form.Label>
-              <Form.Control
-                required
-                type="input"
-                placeholder="Введіть прізвище"
-                name="customer_surname"
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mt-3">
-              <Form.Label>Телефон*</Form.Label>
-              <Form.Control
-                required
-                type="input"
-                placeholder="Введіть телефон"
-                name="customer_phone"
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mt-3">
-              <Form.Label>Пошта*</Form.Label>
-              <Form.Control
-                required
-                type="input"
-                placeholder="Введіть пошту"
-                name="customer_post"
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Button
-              className="mt-3"
-              type="submit"
-              onClick={(e) => handleSubmit(e)}
-            >
-              Оформити
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+                Оформити
+              </Button>
+            </Form>
+          </Col>
+        </>
+      )}
+    </Row>
+  </Container>
+  
   );
 }
 
