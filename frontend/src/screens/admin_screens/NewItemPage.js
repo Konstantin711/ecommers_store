@@ -19,7 +19,7 @@ import axios from "axios";
 
 function NewItemPage() {
   const dispatch = useDispatch();
-  const itemPageData = useSelector((state) => state.itemPage);
+  const itemPageData = useSelector((state) => state.newItemPage);
   const { loading, error, data } = itemPageData;
 
   useEffect(() => {

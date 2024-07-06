@@ -1,33 +1,21 @@
 // src/components/Login.js
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 
 
-import axios from "axios";
+import { login } from '../../redux/actions/adminLoginActions'
 
-const Login = () => {
+const LoginPage = () => {
+    const dispatch = useDispatch();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/accounts/login/",
-        {
-          username,
-          password,
-        }
-      );
-      if (response.data.message === "Login successful") {
-        // Збереження даних користувача
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        // Редирект на адмінку
-        window.location.href = "/admin";
-      }
-    } catch (error) {
-      console.error("Login error", error);
-    }
+    dispatch(login(username, password))
+
   };
 
   return (
@@ -36,11 +24,13 @@ const Login = () => {
         <Col xs={12} md={6} lg={4} className="mx-auto">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Введіть email" />
+              <Form.Control type="email" placeholder="Введіть email" 
+              onChange={(e) => setUsername(e.target.value)}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Введіть пароль" />
+              <Form.Control type="password" placeholder="Введіть пароль" 
+              onChange={(e) => setPassword(e.target.value)}/>
             </Form.Group>
 
             <Button variant="primary" type="submit" className="w-100">
@@ -53,4 +43,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

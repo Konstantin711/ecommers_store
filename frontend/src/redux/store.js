@@ -13,13 +13,13 @@ import { adminPageReducer } from './reducers/adminPageReducers'
 
 
 const reducer = combineReducers({
-    itemPage: newItemPageReducer,
+    newItemPage: newItemPageReducer,
     catalogPage: catalogPageReducer,
     itemPage: itemPageReducer,
     sendToCart: sendToCartReducer,
     cartPage: cartPageReducer,
     confirmationReducer: orderConfirmationReducer,
-    adminReducer: adminPageReducer
+    adminReducer: adminPageReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ?

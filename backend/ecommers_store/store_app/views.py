@@ -247,7 +247,7 @@ def addNewItem(request):
                      "categories": serialized_categories, 
                      "sizes": serialized_sizes, 
                      "colors": serialized_colors}
-
+        print(page_data)
         return Response(page_data, status=status.HTTP_200_OK)
     
     else:
