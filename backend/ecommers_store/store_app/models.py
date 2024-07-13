@@ -112,6 +112,7 @@ class Item(models.Model):
     price = models.FloatField(blank=True)
     fake_price = models.FloatField(default=0.00, blank=True)
     description = models.TextField(blank=True, max_length=400)
+    item_status = models.CharField(blank=True, max_length=40)
 
     # maybe it will be extracted to separate moder or changed to separate images
     images = models.ImageField(upload_to='images/', blank=True)

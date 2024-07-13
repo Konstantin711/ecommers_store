@@ -218,6 +218,24 @@ def createNewOrder(request):
         )
 
 
+@api_view(['GET'])
+def getMainPageData(request):
+    new_items = models.Item.objects.filter(item_status='new')
+    sale_items = models.Item.objects.filter(item_status='sale')
+
+    serialized_new_items = serializers.ItemSerializer(new_items, many=True).data
+    serialized_sale_items = serializers.ItemSerializer(sale_items, many=True).data
+    
+    data = {
+        'new_items': serialized_new_items,
+        'sale_items': serialized_sale_items,
+    }
+
+    return Response(
+        dict(message='Data for Main Page received',
+             data=data))
+
+
 # ADMIN API
 
 @api_view(["GET"])

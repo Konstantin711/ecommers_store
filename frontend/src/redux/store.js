@@ -9,6 +9,7 @@ import { itemPageReducer } from './reducers/itemPageReducers'
 import { sendToCartReducer } from './reducers/itemPageReducers'
 import { orderConfirmationReducer, cartPageReducer } from './reducers/cartPageReducer'
 import { adminPageReducer } from './reducers/adminPageReducers'
+import { homePageReducer } from './reducers/homePageReducers'
 
 
 
@@ -20,6 +21,7 @@ const reducer = combineReducers({
     cartPage: cartPageReducer,
     confirmationReducer: orderConfirmationReducer,
     adminReducer: adminPageReducer,
+    homeReducer: homePageReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ?

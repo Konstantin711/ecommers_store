@@ -1,8 +1,17 @@
-/* ADMIN */
 html, body, #root {
   height: 100%;
   margin: 0;
+  width: 100%; max-width: 100%;
 }
+
+.common-container{
+  /* margin: 0 0; padding: 0; */
+  width: 100% !important; 
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* ADMIN */
 
 #adminContainer{
   height: 100%;
@@ -124,3 +133,9 @@ select option{
   font-size: 11px !important;
 }
 /* ADMIN */
+
+/* LOGIN PAGE */
+
+
+
+/* LOGIN PAGE */

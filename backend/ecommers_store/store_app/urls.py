@@ -13,6 +13,7 @@ urlpatterns = [
     path('get/detailed/detailed/', views.getDetailedCatalogData, name='get detailed catalog data'),
     path('create_order/', views.createNewOrder, name='creates new order'),
     path('get_current_price/', views.get_current_price, name='current price for items in cart'),
+    path('main_page_data/', views.getMainPageData, name='main page data'),
 
     path('admin/', views.getAdminSite, name='Get basic admin page'),
     path('add/new-item/', views.addNewItem, name='add new item'),

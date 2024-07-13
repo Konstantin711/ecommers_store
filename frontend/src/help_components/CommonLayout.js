@@ -11,7 +11,7 @@ const CommonLayout = ({ children }) => {
       <TopHeader />
       <MainHeader />
       <main >
-        <Container>{children}</Container>
+        <Container className="common-container">{children}</Container>
       </main>
       <Footer />
     </>
