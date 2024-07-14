@@ -134,8 +134,48 @@ select option{
 }
 /* ADMIN */
 
-/* LOGIN PAGE */
 
+/* CART PAGE */
+.icon-col {
+  position: relative;
+}
 
+.icon-position {
+  position: absolute;
+  top: -13px;
+  right: 5px;
+  cursor: pointer;
+}
 
-/* LOGIN PAGE */
+.cart-item-title{
+  font-size: 17px !important;
+  font-style: italic;
+  font-family: Ubuntu, sans-serif;
+}
+
+.cart-item-attributes{
+  font-size: 11px !important;
+  font-family: Ubuntu, sans-serif;
+  text-transform: uppercase;
+
+  margin-right: 5px;
+}
+
+.cart-container{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+}
+
+.order-titles{
+  font-size: 11px !important;
+  font-family: Ubuntu, sans-serif;
+  text-transform: uppercase;
+  font-weight: 450;
+}
+
+.payment-select, .post-select{
+  font-size: 11px !important;
+  font-family: Ubuntu, sans-serif;
+  font-weight: 400;
+}
+/* CART PAGE */

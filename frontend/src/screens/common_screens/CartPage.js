@@ -169,23 +169,22 @@ const handleSubmit = async (e) => {
 
   return (
     <Container>
-    <Row>
+    <Row className="mt-3">
       {Object.keys(cartPageItems).length === 0 ? (
         <p>Кошик пустий</p>
       ) : (
         <>
           <Col md={6}>
-            <h3>Обрані товари</h3>
             {Object.keys(cartPageItems).map((key, index) => (
-              <CartItem key={index} item={cartPageItems[key]} />
+              <CartItem key={index} item={cartPageItems[key]} index={index} />
             ))}
           </Col>
           <Col md={6}>
-            <h3>Контакти замовника</h3>
-            <Form>
+            <Form className="cart-container">
               <Form.Group>
-                <Form.Label>Місто*</Form.Label>
+                <Form.Label className="order-titles">Місто*</Form.Label>
                 <AsyncPaginate
+                 className="post-select"
                   required
                   name="delivery_city"
                   value={selectedCity}
@@ -194,12 +193,14 @@ const handleSubmit = async (e) => {
                     setSelectedCity(selectedOption);
                     cityHandler(selectedOption);
                   }}
+                  placeholder="Введіть своє місто"
                 />
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label>Відділення*</Form.Label>
+                <Form.Label className="order-titles">Відділення*</Form.Label>
                 <Select
                   required
+                  className="post-select"
                   name="post_department"
                   value={selectedDepartment}
                   options={departments}
@@ -209,17 +210,18 @@ const handleSubmit = async (e) => {
                     departmentHandler(selectedOption);
                   }}
                   isDisabled={!selectedCity.label}
+                  placeholder="Введіть відділення Нової Пошти"
                 />
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label>Спосіб оплати*</Form.Label>
+                <Form.Label className="order-titles">Спосіб оплати*</Form.Label>
                 <Form.Select
+                  className="payment-select"
                   required
                   name="payment_type"
                   onChange={(event) => {
                     handlePayTypeChange(event);
-                    handleChange(event);
-                  }}
+                    handleChange(event);}}
                   value={cardPay}
                 >
                   <option key={1} value={"Оплата при отриманні"}>
@@ -231,10 +233,10 @@ const handleSubmit = async (e) => {
                 </Form.Select>
               </Form.Group>
               {cardPay === "Оплата карткою" && (
-                <p>Менеджер звʼяжеться з вами для уточнення деталей</p>
+                <p className="payment-select mt-2">Менеджер звʼяжеться з вами для уточнення деталей</p>
               )}
               <Form.Group className="mt-3">
-                <Form.Label>Ім'я*</Form.Label>
+                <Form.Label className="order-titles">Ім'я*</Form.Label>
                 <Form.Control
                   required
                   type="input"
@@ -244,7 +246,7 @@ const handleSubmit = async (e) => {
                 />
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label>Прізвище*</Form.Label>
+                <Form.Label className="order-titles">Прізвище*</Form.Label>
                 <Form.Control
                   required
                   type="input"
@@ -254,7 +256,7 @@ const handleSubmit = async (e) => {
                 />
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label>Телефон*</Form.Label>
+                <Form.Label className="order-titles">Телефон*</Form.Label>
                 <Form.Control
                   required
                   type="input"
@@ -264,7 +266,7 @@ const handleSubmit = async (e) => {
                 />
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label>Пошта*</Form.Label>
+                <Form.Label className="order-titles">Пошта*</Form.Label>
                 <Form.Control
                   required
                   type="input"

@@ -71,7 +71,7 @@ export const deleteItemFromCart = (id) => async (dispatch, getState) => {
 			JSON.stringify(getState().cartPage.cartPageItems)
 		  );
 
-		dispatch({ type: 'QTY_REMOVE_ITEM', payload: 1 })
+		// dispatch({ type: 'QTY_REMOVE_ITEM', payload: 1 })
 
 	}catch(error){
 		console.log(error)
