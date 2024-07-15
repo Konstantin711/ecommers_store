@@ -26,7 +26,7 @@ function CatalogPage() {
 
   return (
     <>
-      <Container fluid>
+      <Container fluid className="catalog-container">
         <Row>
           <Sidebar />
           <Col xs={10} id="page-content-wrapper">
@@ -53,7 +53,7 @@ function CatalogPage() {
                       )}
                       <Card.Img variant="top" src={item.images} />
                       <Card.Body>
-                        <Card.Title>{item.title}</Card.Title>
+                        <Card.Title className="catalog-item-text">{item.title}</Card.Title>
                         <Card.Text>
                           {item.onSale && (
                             <span className="text-muted">
@@ -62,7 +62,7 @@ function CatalogPage() {
                           )}
                           {item.price} грн.
                         </Card.Text>
-                        <Button href={`/catalog/${item.slug}`} className="buy-button">Детальніше</Button>
+                        <Button href={`/catalog/${item.slug}`} className="catalog-item-button">Детальніше</Button>
 
                       </Card.Body>
                     </Card>

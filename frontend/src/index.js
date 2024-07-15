@@ -8,6 +8,7 @@ import './styles/footer.css'
 import './styles/main_header.css'
 import './styles/main_page.css'
 import './styles/sidebar.css'
+import './styles/catalog.css'
 import './styles/single_item_page.css'
 import './styles/slider.css'
 import './index.css';

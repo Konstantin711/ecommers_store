@@ -10,6 +10,7 @@ import ContactPage from "./screens/common_screens/DeliveryPayment";
 import CatalogPage from "./screens/common_screens/CatalogPage";
 import ItemPage from "./screens/common_screens/ItemPage";
 import CartPage from "./screens/common_screens/CartPage";
+import LoginPage from "./screens/common_screens/LoginPage";
 
 import AdminPage from "./screens/admin_screens/AdminPage";
 import NewItemPage from "./screens/admin_screens/NewItemPage";
@@ -77,6 +78,16 @@ function App() {
             <CommonLayout>
               <Routes>
                 <Route index element={<CartPage />} />
+              </Routes>
+            </CommonLayout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <CommonLayout>
+              <Routes>
+                <Route index element={<LoginPage />} />
               </Routes>
             </CommonLayout>
           }

@@ -1,4 +1,12 @@
 /* SIDEBAR */
+
+.catalog-sidebar-navigation label{
+  cursor: pointer;
+}
+.catalog-container{
+  min-height: 600px;
+}
+
 .sidebar-text{
     font-family: Roboto, inherit;
     /* color: #0080ff; */
@@ -21,41 +29,6 @@
 
     margin-left: 3px;
   }
-
-  /* CHECKBOXES */
-  /* .catalog-checkbox {
-    width: 15px; 
-    height: 10px; 
-    border: 1px solid #000; 
-    border-radius: 3px; 
-    cursor: pointer;
-  }
-  
-  .catalog-checkbox input[type="checkbox"] {
-    display: none;
-  }
-  
-  .catalog-checkbox::before {
-    content: "";
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 18px; 
-    height: 18px; 
-    background-color: transparent; 
-  }
-  
-  .catalog-checkbox input[type="checkbox"]:checked + .catalog-checkbox::before {
-    background-color: #007bff;
-  }
-  
-  .catalog-checkbox input[type="checkbox"]:checked + .catalog-checkbox {
-    background-color: #007bff;
-    border-color: #007bff;
-  } */
-  
-
-  /* CHECKBOXES */
   
   .sidebar-price{
     font-family: Roboto, sans-serif;
