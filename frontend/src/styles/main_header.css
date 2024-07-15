@@ -1,6 +1,10 @@
 /* MAIN HEADER */
   /* NAVIGATION */
-  
+
+  .main-header{
+    height: 45px;
+  }
+
   .dark-dropdown-menu .dropdown-menu{
     background-color: rgba(38, 37, 37, 0.95);
     border-radius: 0 !important;
@@ -11,10 +15,10 @@
   }
 
   #basic-nav-dropdown{
-    /* letter-spacing: 2pt; */
+    letter-spacing: 1pt;
     font-family: Roboto, sans-serif;
-    font-size: 13px !important;
-    font-weight: 700 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
     color: #232323 !important;
     text-transform: uppercase;
   }
