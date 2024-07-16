@@ -10,6 +10,7 @@ import { sendToCartReducer } from './reducers/itemPageReducers'
 import { orderConfirmationReducer, cartPageReducer } from './reducers/cartPageReducer'
 import { adminPageReducer } from './reducers/adminPageReducers'
 import { homePageReducer } from './reducers/homePageReducers'
+import { headerPageReducer } from './reducers/topHeaderReducers'
 
 
 
@@ -22,14 +23,19 @@ const reducer = combineReducers({
     confirmationReducer: orderConfirmationReducer,
     adminReducer: adminPageReducer,
     homeReducer: homePageReducer,
+    headerReducer: headerPageReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ?
     JSON.parse(localStorage.getItem('cartItems')) : []
+
+const loginDataFromStorage = localStorage.getItem('userInfo') ?
+    JSON.parse(localStorage.getItem('userInfo')) : []
     
 
 const initialState = {
     sendToCart: { cartItems: cartItemsFromStorage },
+    headerReducer: { userInfo: loginDataFromStorage }
 }
 
 

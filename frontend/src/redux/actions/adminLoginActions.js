@@ -23,7 +23,13 @@ export const login = (email, password) => async (dispatch) => {
       );
   
       localStorage.setItem("userInfo", JSON.stringify(data));
-      window.location.href = "/admin";
+      
+      if (window.location.href === 'http://localhost:3000/login'){
+        window.location.href = "/";
+      }
+      else {
+        window.location.href = "/admin";
+      }
   
       dispatch({
         type: LOGIN_PAGE_SUCCESS,

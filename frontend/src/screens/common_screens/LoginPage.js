@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 
 
-// import { login } from '../../redux/actions/adminLoginActions'
+import { login } from '../../redux/actions/adminLoginActions'
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch(login(username, password))
+    dispatch(login(username, password))
 
   };
 

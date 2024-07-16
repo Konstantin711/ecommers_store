@@ -30,4 +30,36 @@
     font-size: 0.8em;
     font-weight: 500;
   }
+
+  .login-text{
+    font-size: 0.7em;
+  }
+
+.user-email{
+  font-size: 0.7em;
+}
+
+.dropdown-menu {
+  background-color: #232323 !important;
+}
+
+/* Стиль для елементів меню */
+.user-email .dropdown-item {
+  font-family: Roboto, sans-serif;
+  color: hsla(0, 0%, 100%, .8);
+  font-size: 0.7em;
+  padding: 6px 20px; 
+}
+
+/* Стиль для елементів при наведенні */
+.user-email .dropdown-item:hover {
+  background-color: #ffffff; 
+  color: #495057; 
+}
+
+/* Стиль для активних елементів */
+.user-email .dropdown-item.active {
+  background-color: #007bff;
+  color: #ffffff;
+}
   /* TOP HEADER */
