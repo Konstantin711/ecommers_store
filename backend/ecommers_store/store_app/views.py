@@ -15,6 +15,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSerializerWithToken
 
+from django.contrib.auth.models import AnonymousUser
+
+
 from time import time
 
 
@@ -193,19 +196,45 @@ def getItemBySlug(request, slug):
 
 @api_view(["POST"])
 def createNewOrder(request):
-    print(request.data)
+    # print(request.data)
+
+    response_message = ''
+
+    if isinstance(request.user, AnonymousUser):
+        print('This user will be created')
+        all_data = request.data.dict()
+
+        new_customer_data = {
+            'name': all_data.get('customer_name', None),
+            'email': all_data.get('customer_post', None),
+            'real_name': all_data.get('customer_name', None),
+            'real_surname': all_data.get('customer_surname', None),
+            'phone_number': all_data.get('customer_phone', None),
+        }
+
+        new_customer_data.update({'password': 'Test!123'})
+
+        new_customer = serializers.UserCustomerSerializer(data=new_customer_data, many=False)
+        # print(new_customer.error_messages)
+
+        if new_customer.is_valid():
+            response_message += f'Новий користувач був створений'
+            new_customer.save()
+
+    else:
+        print('This is an existed user')
 
     new_order = request.data.dict()
     new_order['ordered_items'] = json.loads(new_order.get('ordered_items', '[]'))
 
     serialized_data = serializers.OrdersSerializer(data=new_order, many=False)
-    print(serialized_data.error_messages)
+    # print(serialized_data.error_messages)
 
     if serialized_data.is_valid():
         serialized_data.save()
         return Response(
             dict(
-                message='New order was created',
+                message=response_message,
                 status=status.HTTP_201_CREATED
             )
         )

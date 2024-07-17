@@ -11,8 +11,6 @@ import CartItem from "../../components/common_components/cartItem";
 import { getNovaPostCities,getNovaPostDepartments, getCartPageData, createNewOrder }
  from '../../redux/actions/cartPageActions'
 
-import axios from 'axios'
-
 
 
 function Cart() {
@@ -20,7 +18,6 @@ function Cart() {
   const dispatch = useDispatch();
 
   // CHOSEN ITEMS
-
   const cartPageInformation = useSelector((state) => state.cartPage);
   const { cart_loading, cart_error, cartPageItems } = cartPageInformation;
 
@@ -148,7 +145,6 @@ const departmentHandler = async (selectedOption) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault()
-  console.log(formData)
 
   const data = new FormData();
   data.append('city', formData.city);
@@ -158,14 +154,10 @@ const handleSubmit = async (e) => {
   data.append('customer_surname', formData.customer_surname);
   data.append('customer_phone', formData.customer_phone);
   data.append('customer_post', formData.customer_post);
-
   data.append('ordered_items', JSON.stringify(cartPageItems))
 
   dispatch(createNewOrder(data))
-
   };
-
-
 
   return (
     <Container>

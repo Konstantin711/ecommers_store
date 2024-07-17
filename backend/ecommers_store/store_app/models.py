@@ -11,14 +11,15 @@ logger = logging.getLogger('django')
 class UserProfileManager(BaseUserManager):
     """Manager for User profiles"""
 
-    def create_user(self, email, name, password=None):
+    def create_user(self, email, name, password=None, **extra_fields):
         """Create a new User profile"""
         if not email: raise ValueError('User must have an email address')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name)
+        user = self.model(email=email, name=name, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+
         return user
 
     def create_superuser(self, email, name, password):
@@ -42,13 +43,19 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='customer')
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
+    real_name = models.CharField(max_length=128, blank=True)
+    real_surname = models.CharField(max_length=128, blank=True)
+    phone_number = models.CharField(max_length=128, blank=True)
+
     objects = UserProfileManager()
 
-    # перевизначаемо поле по якому логіниться юзер, по дефолту це юзен нейм, а ми ставимо пошту
+    # перевизначаемо поле по якому логіниться юзер, 
+    # по дефолту це юзер нейм, а ми ставимо пошту
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 

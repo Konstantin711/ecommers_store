@@ -39,12 +39,13 @@ export const cartPageReducer = (state = { cartPageItems: [] }, action) => {
     case CREATE_NEW_ORDER_REQUEST:
       return {
         loading: true,
+        cartPageItems: [],
       };
 
     case CREATE_NEW_ORDER_SUCCESS:
       return {
         loading: false,
-        cartPageItems: [],
+        cartPageItems: action.payload,
       };
 
     case CREATE_NEW_ORDER_FAIL:

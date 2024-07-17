@@ -5,14 +5,14 @@ import {
 } from '../constants/adminPageConstants'
 
 
-import axios from '../../axios';
+import customAxios from "../../axios";
 
 
 export const getAdminPageData = () => async (dispatch) => {
 	try{
 		dispatch({ type: GET_ADMIN_PAGE_REQUEST })
 
-        const {response} = await axios.get("/api/admin/");
+        const {response} = await customAxios.get("/api/admin/");
         const data = response;
 		
 

@@ -13,7 +13,8 @@ import {
 } from "../constants/topHeaderConstants";
 
 
-import axios from "../../axios";
+import customAxios from "../../axios";
+
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -23,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
       "Content-type": "application/json",
     };
 
-    const { data } = await axios.post(
+    const { data } = await customAxios.post(
       "/api/token/",
       { email: email, password: password },
       config

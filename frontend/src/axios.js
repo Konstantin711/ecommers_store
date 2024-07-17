@@ -1,11 +1,11 @@
 // src/axios.js
 import axios from 'axios';
 
-const instance = axios.create({
+const customAxios = axios.create({
     baseURL: 'http://localhost:8000', // Ваш базовий URL
 });
 
-instance.interceptors.request.use(
+customAxios.interceptors.request.use(
     config => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
         const token = userInfo ? userInfo.access : null; // Отримуємо токен доступу
@@ -19,7 +19,7 @@ instance.interceptors.request.use(
     }
 );
 
-instance.interceptors.response.use(
+customAxios.interceptors.response.use(
     response => response,
     error => {
         if (error.response.status === 401 || error.response.status === 403) {
@@ -30,4 +30,4 @@ instance.interceptors.response.use(
     }
 );
 
-export default instance;
+export default customAxios;

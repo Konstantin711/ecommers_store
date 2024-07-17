@@ -17,6 +17,7 @@ import {
 } from '../constants/cartPageConstants'
 
 import axios from 'axios'
+import customAxios from "../../axios";
 
 const updatePricesInLocalData = (localData, updatedPrices) => {
 	// Перевірка, що localData і updatedPrices є масивами
@@ -53,7 +54,7 @@ export const getCartPageData = (dataFromLocalStorage) => async (dispatch) => {
 		
 		const updatedPrices = response.data.data;
 		const updatedLocalData = updatePricesInLocalData(dataFromLocalStorage, updatedPrices);
-		console.log(updatedLocalData ,"FROM ACTIONS")
+		
 		dispatch({ type: UPDATE_CART_REQUEST, payload: updatedLocalData})
 
 	}catch(error){
@@ -83,7 +84,7 @@ export const createNewOrder = (data) => async (dispatch) => {
 	try {
 		dispatch({ type: CREATE_NEW_ORDER_REQUEST })
 
-		const response = await axios.post(
+		const response = await customAxios.post(
 		  "api/create_order/",
 		  data,
 		  {
@@ -96,6 +97,8 @@ export const createNewOrder = (data) => async (dispatch) => {
 		localStorage.removeItem(
 			"cartItems",
 		  );
+		
+		console.log(response.data, 'Response data')
 
 		dispatch({ type: CREATE_NEW_ORDER_SUCCESS, payload: response.data })
 

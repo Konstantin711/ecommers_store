@@ -35,6 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ['email', 'name', 'is_active', 'is_staff', 'objects']
 
+
     def get__id(self, obj):
         return obj.id
 
@@ -57,6 +58,29 @@ class UserSerializerWithToken(UserSerializer):
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
+    
+
+class UserCustomerSerializer(serializers.ModelSerializer):
+    """ This method creates a customer-user automaticaly. 
+    When user makes first order """
+
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = UserProfile
+        fields = ('name', 'password', 'email', 'real_name', 'real_surname', 'phone_number', 'objects')
+
+    def create(self, validated_data):
+        user = UserProfile.objects.create_user(
+            name=validated_data['name'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            real_name=validated_data['real_name'],
+            real_surname=validated_data['real_surname'],
+            phone_number=validated_data['phone_number']
+        )
+
+        return user
 
 
 # USER SERIALIZER END
