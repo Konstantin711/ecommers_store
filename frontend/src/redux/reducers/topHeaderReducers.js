@@ -6,16 +6,25 @@ import {
 
 export const headerPageReducer = (state = { userInfo: [] }, action) => {
   switch (action.type) {
+
     case GET_HEADER_DATA_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
+    case 'RESET_USER_INFO_ARRAY':
+        return {
+          ...state,
+          loading: true,
+          userInfo: []
+        };
+
     case GET_HEADER_DATA_SUCCESS:
       return {
         ...state,
         loading: false,
+        userInfo: action.payload
       };
 
     case GET_HEADER_DATA_FAILED:

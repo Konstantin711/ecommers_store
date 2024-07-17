@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { logout } from '../../redux/actions/adminLoginActions'
+import { getData } from '../../redux/actions/topHeaderActions'
+
 import {
   Container,
   Nav
@@ -16,13 +19,17 @@ import {
 
 function TopHeader() {
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const headerInfo = useSelector((state) => state.headerReducer)
   const { loading, error, userInfo } = headerInfo
+
+  useEffect(() => {
+    dispatch(getData())
+  }, []);
   
   const logoutHandler = (e) => {
     e.preventDefault()
-    // dispatch(logout())
+    dispatch(logout())
   }
 
   const [user, setUser] = useState(userInfo);
@@ -54,7 +61,7 @@ function TopHeader() {
       {user && user.name ? (
         <>
           <div className="d-flex align-items-center ">
-            <NavDropdown title={user.email} className="user-email login-menu">
+            <NavDropdown title={user.email} className="user-email">
               <NavDropdown.Item>Кабінет</NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => logoutHandler(e)}>
                 Вийти
